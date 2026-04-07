@@ -183,6 +183,20 @@ def extract_examples(schema, title, example_data):
     return result
 
 
+def replace_const_with_enum(obj):
+    """Recursively replace 'const': value with 'enum': [value] in dicts/lists."""
+    if isinstance(obj, dict):
+        obj = OrderedDict(obj)
+        if "const" in obj:
+            obj["enum"] = [obj.pop("const")]
+        for k, v in obj.items():
+            obj[k] = replace_const_with_enum(v)
+        return obj
+    elif isinstance(obj, list):
+        return [replace_const_with_enum(i) for i in obj]
+    else:
+        return obj
+
 def extract_schema(raw_schema):
     skip_keys = {"title", "x-stoplight", "x-tag", "examples", "description"}
     schema = OrderedDict()
@@ -191,6 +205,7 @@ def extract_schema(raw_schema):
             schema[key] = value
     if "type" not in schema:
         schema["type"] = "object"
+    schema = replace_const_with_enum(schema)
     return schema
 
 

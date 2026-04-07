@@ -76,8 +76,10 @@
                                 "properties": {
                                     "command": {
                                         "type": "string",
-                                        "const": "set_impinjGen2X",
-                                        "description": "MQTT command name"
+                                        "description": "MQTT command name",
+                                        "enum": [
+                                            "set_impinjGen2X"
+                                        ]
                                     },
                                     "command_id": {
                                         "type": "string",
@@ -99,8 +101,10 @@
                                                 "properties": {
                                                     "action": {
                                                         "type": "string",
-                                                        "const": "enableTagVisibility",
-                                                        "description": "Enables the reader to read protected tags"
+                                                        "description": "Enables the reader to read protected tags",
+                                                        "enum": [
+                                                            "enableTagVisibility"
+                                                        ]
                                                     },
                                                     "password": {
                                                         "type": "string",
@@ -151,8 +155,10 @@
                                     "properties": {
                                         "command": {
                                             "type": "string",
-                                            "const": "set_impinjGen2X",
-                                            "description": "MQTT command name that was executed"
+                                            "description": "MQTT command name that was executed",
+                                            "enum": [
+                                                "set_impinjGen2X"
+                                            ]
                                         },
                                         "command_id": {
                                             "type": "string",
@@ -241,8 +247,10 @@
                                 "properties": {
                                     "command": {
                                         "type": "string",
-                                        "const": "set_impinjGen2X",
-                                        "description": "MQTT command name"
+                                        "description": "MQTT command name",
+                                        "enum": [
+                                            "set_impinjGen2X"
+                                        ]
                                     },
                                     "command_id": {
                                         "type": "string",
@@ -264,8 +272,10 @@
                                                 "properties": {
                                                     "action": {
                                                         "type": "string",
-                                                        "const": "disableTagVisibility",
-                                                        "description": "Disables reading of protected tags"
+                                                        "description": "Disables reading of protected tags",
+                                                        "enum": [
+                                                            "disableTagVisibility"
+                                                        ]
                                                     },
                                                     "password": {
                                                         "type": "string",
@@ -316,8 +326,10 @@
                                     "properties": {
                                         "command": {
                                             "type": "string",
-                                            "const": "set_impinjGen2X",
-                                            "description": "MQTT command name that was executed"
+                                            "description": "MQTT command name that was executed",
+                                            "enum": [
+                                                "set_impinjGen2X"
+                                            ]
                                         },
                                         "command_id": {
                                             "type": "string",
@@ -406,8 +418,10 @@
                                 "properties": {
                                     "command": {
                                         "type": "string",
-                                        "const": "set_impinjGen2X",
-                                        "description": "MQTT command name"
+                                        "description": "MQTT command name",
+                                        "enum": [
+                                            "set_impinjGen2X"
+                                        ]
                                     },
                                     "command_id": {
                                         "type": "string",
@@ -431,8 +445,10 @@
                                                 "properties": {
                                                     "action": {
                                                         "type": "string",
-                                                        "const": "enableTagProtection",
-                                                        "description": "Sets the tag to protected mode"
+                                                        "description": "Sets the tag to protected mode",
+                                                        "enum": [
+                                                            "enableTagProtection"
+                                                        ]
                                                     },
                                                     "password": {
                                                         "type": "string",
@@ -494,8 +510,10 @@
                                     "properties": {
                                         "command": {
                                             "type": "string",
-                                            "const": "set_impinjGen2X",
-                                            "description": "MQTT command name that was executed"
+                                            "description": "MQTT command name that was executed",
+                                            "enum": [
+                                                "set_impinjGen2X"
+                                            ]
                                         },
                                         "command_id": {
                                             "type": "string",
@@ -591,8 +609,10 @@
                                 "properties": {
                                     "command": {
                                         "type": "string",
-                                        "const": "set_impinjGen2X",
-                                        "description": "MQTT command name"
+                                        "description": "MQTT command name",
+                                        "enum": [
+                                            "set_impinjGen2X"
+                                        ]
                                     },
                                     "command_id": {
                                         "type": "string",
@@ -613,8 +633,10 @@
                                                 "properties": {
                                                     "enabled": {
                                                         "type": "boolean",
-                                                        "const": true,
-                                                        "description": "Enable FastID feature"
+                                                        "description": "Enable FastID feature",
+                                                        "enum": [
+                                                            true
+                                                        ]
                                                     }
                                                 },
                                                 "description": "FastID feature configuration"
@@ -657,8 +679,10 @@
                                     "properties": {
                                         "command": {
                                             "type": "string",
-                                            "const": "set_impinjGen2X",
-                                            "description": "MQTT command name that was executed"
+                                            "description": "MQTT command name that was executed",
+                                            "enum": [
+                                                "set_impinjGen2X"
+                                            ]
                                         },
                                         "command_id": {
                                             "type": "string",
@@ -740,8 +764,10 @@
                                 "properties": {
                                     "command": {
                                         "type": "string",
-                                        "const": "set_impinjGen2X",
-                                        "description": "MQTT command name"
+                                        "description": "MQTT command name",
+                                        "enum": [
+                                            "set_impinjGen2X"
+                                        ]
                                     },
                                     "command_id": {
                                         "type": "string",
@@ -762,8 +788,10 @@
                                                 "properties": {
                                                     "enabled": {
                                                         "type": "boolean",
-                                                        "const": false,
-                                                        "description": "Disable FastID feature"
+                                                        "description": "Disable FastID feature",
+                                                        "enum": [
+                                                            false
+                                                        ]
                                                     }
                                                 },
                                                 "description": "FastID feature configuration"
@@ -806,8 +834,10 @@
                                     "properties": {
                                         "command": {
                                             "type": "string",
-                                            "const": "set_impinjGen2X",
-                                            "description": "MQTT command name that was executed"
+                                            "description": "MQTT command name that was executed",
+                                            "enum": [
+                                                "set_impinjGen2X"
+                                            ]
                                         },
                                         "command_id": {
                                             "type": "string",
@@ -889,8 +919,10 @@
                                 "properties": {
                                     "command": {
                                         "type": "string",
-                                        "const": "set_impinjGen2X",
-                                        "description": "MQTT command name"
+                                        "description": "MQTT command name",
+                                        "enum": [
+                                            "set_impinjGen2X"
+                                        ]
                                     },
                                     "command_id": {
                                         "type": "string",
@@ -911,8 +943,10 @@
                                                 "properties": {
                                                     "enabled": {
                                                         "type": "boolean",
-                                                        "const": true,
-                                                        "description": "Enable TagFocus feature"
+                                                        "description": "Enable TagFocus feature",
+                                                        "enum": [
+                                                            true
+                                                        ]
                                                     }
                                                 },
                                                 "description": "TagFocus feature configuration"
@@ -955,8 +989,10 @@
                                     "properties": {
                                         "command": {
                                             "type": "string",
-                                            "const": "set_impinjGen2X",
-                                            "description": "MQTT command name that was executed"
+                                            "description": "MQTT command name that was executed",
+                                            "enum": [
+                                                "set_impinjGen2X"
+                                            ]
                                         },
                                         "command_id": {
                                             "type": "string",
@@ -1038,8 +1074,10 @@
                                 "properties": {
                                     "command": {
                                         "type": "string",
-                                        "const": "set_impinjGen2X",
-                                        "description": "MQTT command name"
+                                        "description": "MQTT command name",
+                                        "enum": [
+                                            "set_impinjGen2X"
+                                        ]
                                     },
                                     "command_id": {
                                         "type": "string",
@@ -1060,8 +1098,10 @@
                                                 "properties": {
                                                     "enabled": {
                                                         "type": "boolean",
-                                                        "const": false,
-                                                        "description": "Disable TagFocus feature"
+                                                        "description": "Disable TagFocus feature",
+                                                        "enum": [
+                                                            false
+                                                        ]
                                                     }
                                                 },
                                                 "description": "TagFocus feature configuration"
@@ -1104,8 +1144,10 @@
                                     "properties": {
                                         "command": {
                                             "type": "string",
-                                            "const": "set_impinjGen2X",
-                                            "description": "MQTT command name that was executed"
+                                            "description": "MQTT command name that was executed",
+                                            "enum": [
+                                                "set_impinjGen2X"
+                                            ]
                                         },
                                         "command_id": {
                                             "type": "string",
@@ -1187,8 +1229,10 @@
                                 "properties": {
                                     "command": {
                                         "type": "string",
-                                        "const": "set_impinjGen2X",
-                                        "description": "MQTT command name"
+                                        "description": "MQTT command name",
+                                        "enum": [
+                                            "set_impinjGen2X"
+                                        ]
                                     },
                                     "command_id": {
                                         "type": "string",
@@ -1216,8 +1260,10 @@
                                                         "properties": {
                                                             "action": {
                                                                 "type": "string",
-                                                                "const": "quiet",
-                                                                "description": "Silence the specified tags"
+                                                                "description": "Silence the specified tags",
+                                                                "enum": [
+                                                                    "quiet"
+                                                                ]
                                                             },
                                                             "tagIDs": {
                                                                 "type": "array",
@@ -1281,8 +1327,10 @@
                                     "properties": {
                                         "command": {
                                             "type": "string",
-                                            "const": "set_impinjGen2X",
-                                            "description": "MQTT command name that was executed"
+                                            "description": "MQTT command name that was executed",
+                                            "enum": [
+                                                "set_impinjGen2X"
+                                            ]
                                         },
                                         "command_id": {
                                             "type": "string",
@@ -1364,8 +1412,10 @@
                                 "properties": {
                                     "command": {
                                         "type": "string",
-                                        "const": "set_impinjGen2X",
-                                        "description": "MQTT command name"
+                                        "description": "MQTT command name",
+                                        "enum": [
+                                            "set_impinjGen2X"
+                                        ]
                                     },
                                     "command_id": {
                                         "type": "string",
@@ -1393,8 +1443,10 @@
                                                         "properties": {
                                                             "action": {
                                                                 "type": "string",
-                                                                "const": "unquiet",
-                                                                "description": "Restore the specified tags"
+                                                                "description": "Restore the specified tags",
+                                                                "enum": [
+                                                                    "unquiet"
+                                                                ]
                                                             },
                                                             "tagIDs": {
                                                                 "type": "array",
@@ -1458,8 +1510,10 @@
                                     "properties": {
                                         "command": {
                                             "type": "string",
-                                            "const": "set_impinjGen2X",
-                                            "description": "MQTT command name that was executed"
+                                            "description": "MQTT command name that was executed",
+                                            "enum": [
+                                                "set_impinjGen2X"
+                                            ]
                                         },
                                         "command_id": {
                                             "type": "string",
@@ -1541,8 +1595,10 @@
                                 "properties": {
                                     "command": {
                                         "type": "string",
-                                        "const": "get_impinjGen2X",
-                                        "description": "MQTT command name"
+                                        "description": "MQTT command name",
+                                        "enum": [
+                                            "get_impinjGen2X"
+                                        ]
                                     },
                                     "command_id": {
                                         "type": "string",
@@ -1584,8 +1640,10 @@
                                     "properties": {
                                         "command": {
                                             "type": "string",
-                                            "const": "get_impinjGen2X",
-                                            "description": "MQTT command name that was executed"
+                                            "description": "MQTT command name that was executed",
+                                            "enum": [
+                                                "get_impinjGen2X"
+                                            ]
                                         },
                                         "command_id": {
                                             "type": "string",
@@ -1740,8 +1798,10 @@
                                 "properties": {
                                     "command": {
                                         "type": "string",
-                                        "const": "start",
-                                        "description": "MQTT command name"
+                                        "description": "MQTT command name",
+                                        "enum": [
+                                            "start"
+                                        ]
                                     },
                                     "command_id": {
                                         "type": "string",
@@ -1756,8 +1816,10 @@
                                         "properties": {
                                             "applyImpinjGen2X": {
                                                 "type": "boolean",
-                                                "const": true,
-                                                "description": "true to apply Gen2X config when starting the radio"
+                                                "description": "true to apply Gen2X config when starting the radio",
+                                                "enum": [
+                                                    true
+                                                ]
                                             }
                                         },
                                         "description": "Command payload containing the feature configuration"
@@ -1795,8 +1857,10 @@
                                     "properties": {
                                         "command": {
                                             "type": "string",
-                                            "const": "start",
-                                            "description": "MQTT command name that was executed"
+                                            "description": "MQTT command name that was executed",
+                                            "enum": [
+                                                "start"
+                                            ]
                                         },
                                         "command_id": {
                                             "type": "string",
@@ -1877,8 +1941,10 @@
                                 "properties": {
                                     "command": {
                                         "type": "string",
-                                        "const": "stop",
-                                        "description": "MQTT command name"
+                                        "description": "MQTT command name",
+                                        "enum": [
+                                            "stop"
+                                        ]
                                     },
                                     "command_id": {
                                         "type": "string",
@@ -1920,8 +1986,10 @@
                                     "properties": {
                                         "command": {
                                             "type": "string",
-                                            "const": "stop",
-                                            "description": "MQTT command name that was executed"
+                                            "description": "MQTT command name that was executed",
+                                            "enum": [
+                                                "stop"
+                                            ]
                                         },
                                         "command_id": {
                                             "type": "string",

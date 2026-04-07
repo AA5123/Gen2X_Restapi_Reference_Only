@@ -238,7 +238,6 @@
       var summary = op.summary || path;
       var id = slugify(summary);
       var desc = op.description || '';
-      var mqttPath = path;
 
       /* Extract example JSONs for REST tabs */
       var reqExampleJson = '';
@@ -306,7 +305,6 @@
 
       return '<div class="operation" id="op-' + id + '">' +
         '<h4 class="op-title">' + escHtml(summary) + '</h4>' +
-        '<div class="mqtt-path">' + escHtml(mqttPath) + '</div>' +
         '<div class="op-description md-content">' + md(desc) + '</div>' +
         reqHtml + resHtml +
         '</div><hr class="op-divider">';
