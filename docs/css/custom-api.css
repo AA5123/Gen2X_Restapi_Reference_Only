@@ -251,7 +251,7 @@ h3.tag-heading {
   margin-top: var(--sp-6);
   margin-bottom: var(--sp-3);
   padding-bottom: var(--sp-2);
-  border-bottom: 2px solid var(--color-primary);
+  border-bottom: 2px solid var(--color-text);
   color: var(--color-text);
 }
 
