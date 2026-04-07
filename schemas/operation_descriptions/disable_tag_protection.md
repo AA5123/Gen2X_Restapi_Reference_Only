@@ -1,3 +1,3 @@
-﻿Removes the TagProtect lock from a specific tag. Once disabled, the tag becomes visible to all readers again without needing any password.
+﻿Removes the TagProtect lock from a specific tag. After you send this command, the tag becomes visible to all readers without requiring a password.
 
-Send the same tag ID and password that were used when protection was enabled.
+Provide the same EPC ID and password that you used when you enabled protection.

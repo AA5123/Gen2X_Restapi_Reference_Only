@@ -1,3 +1,1 @@
-﻿Disables FastID. Tags revert to standard behaviour — only the EPC is returned in each scan response.
-
-The TID must be retrieved in a separate operation if needed.
+﻿Disables FastID. Tags revert to standard behavior and return only the EPC in each inventory response. To retrieve the TID, you must perform a separate read operation.

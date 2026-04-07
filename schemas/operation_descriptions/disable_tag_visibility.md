@@ -1,1 +1,1 @@
-﻿Revokes the reader's ability to see protected tags. Even if the password was configured previously, the reader will no longer surface protected tags in inventory results after this command.
+﻿Revokes the reader's permission to see protected tags. After you send this command, the reader no longer surfaces protected tags in inventory results, even if a password was previously configured.

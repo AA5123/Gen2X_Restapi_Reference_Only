@@ -1,33 +1,25 @@
-﻿MQTT-based API for controlling Impinj Gen2X features on Zebra fixed RFID readers. 
+﻿Use this API to configure and control Impinj Gen2X features on Zebra fixed RFID readers over MQTT.
 
 ## Overview
 
-This tutorial provides a walk-through of the steps to use Impinj Gen2X tag features via the MQTT API on Zebra fixed RFID readers, including:
+This API lets you configure the following Impinj Gen2X features:
 
-- Protected Mode
-- TagFocus
-- Tag Quieting
-- FastID
+- **Tag Protection** — Lock individual tags with a password so they're invisible to unauthorized readers.
+- **FastID** — Return the EPC and TID in a single inventory response.
+- **TagFocus** — Silence already-read tags so the reader focuses on new ones.
+- **Tag Quieting** — Silence specific tags by EPC ID.
 
-### Details
+Impinj Gen2X extends the Gen2 radio and logical layers. Your tags must support Gen2X to use these features. To check whether your tags are compatible, see the [Impinj Gen2X tag specifications](http://www.impinj.com/Gen2X).
 
-Impinj Gen2X is an enhancement to Gen2's radio and logical layers. Impinj Gen2X tags are required to leverage these features with Gen2X-enabled Zebra RFID Readers.
+## Before you begin
 
-Users should verify whether their tags support these operations by referring to Impinj Gen2X tag specifications: [impinj.com/Gen2X](http://www.impinj.com/Gen2X)
+Set up your MQTT connection, broker, and topic before using this API. For setup instructions, see the [Zebra IoTC MQTT Setup Guide](https://zebradevs.github.io/rfid-ziotc-docs/other_cloud_support/MQTT/index.html).
 
+## Get started
 
+1. Configure the Gen2X features you want to use with the set commands below.
+2. Verify your configuration with `get_gen2x_config`.
+3. Stop the radio if it's running.
+4. Start the radio with `start_with_gen2x` and set `applyImpinjGen2X` to `true`.
 
-## Setting it up
-
-For MQTT connection setup, broker details, and topic onboarding, follow the Zebra reference guide:
-
-- [Zebra IoTC MQTT Setup Guide](https://zebradevs.github.io/rfid-ziotc-docs/other_cloud_support/MQTT/index.html)
-
-### Next steps
-
-1. Configure required Gen2X features using the API commands below.
-2. Verify settings with `get_gen2x_config`.
-3. Stop the radio if running.
-4. Start with `start_with_gen2x` and set `applyImpinjGen2X` to `true`.
-
-> NOTE: The radio must be stopped before applying Gen2X configuration. Starting with Gen2X active while the radio is already running will return an error.
+> **Note:** You must stop the radio before applying Gen2X configuration changes. Starting the radio while it's already running returns an error.

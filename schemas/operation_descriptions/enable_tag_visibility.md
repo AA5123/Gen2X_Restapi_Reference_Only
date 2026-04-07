@@ -1,3 +1,3 @@
-﻿Grants the reader permission to see protected (hidden) tags during scanning. Provide the correct access password — the reader uses it to unmask protected tags in inventory rounds.
+﻿Grants the reader permission to see protected tags during inventory. Provide the correct access password and the reader uses it to unmask protected tags in inventory rounds.
 
-The tag itself does not need to be specified; all protected tags matching the password become visible to the reader.
+You don't need to specify individual tag IDs. All protected tags that match the password become visible to the reader.

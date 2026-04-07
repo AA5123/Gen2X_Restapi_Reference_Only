@@ -1,3 +1,1 @@
-﻿Enables Impinj TagFocus. Tags that have already been read stay quiet and stop responding in subsequent inventory rounds.
-
-The reader focuses on finding new or unread tags, which is ideal for dense tag environments where some tags are difficult to detect. Targets tags inventoried in session S1.
+﻿Enables TagFocus so that tags stay quiet after they've been read and don't respond in subsequent inventory rounds. The reader focuses on new or unread tags, which improves read rates in dense tag environments. TagFocus applies to tags inventoried in session S1.

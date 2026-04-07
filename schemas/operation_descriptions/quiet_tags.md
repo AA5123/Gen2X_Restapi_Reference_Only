@@ -1,3 +1,3 @@
-﻿Silences one or more specific tags by EPC ID. Quieted tags will not respond during inventory rounds while the configuration is active.
+﻿Silences one or more specific tags by EPC ID. Quieted tags don't respond during inventory rounds while the configuration is active. Other tags are unaffected.
 
-Other tags are unaffected. Use `unquiet_tags` to restore them.
+To restore quieted tags, use `unquiet_tags`.

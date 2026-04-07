@@ -1,1 +1,1 @@
-﻿Disables TagFocus. All tags respond normally again in every inventory round, regardless of whether they have been read before.
+﻿Disables TagFocus. All tags respond normally in every inventory round, regardless of whether they've been read before.
