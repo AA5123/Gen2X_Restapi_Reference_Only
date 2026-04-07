@@ -1,4 +1,4 @@
-﻿MQTT-based API for controlling Impinj Gen2X features on Zebra fixed RFID readers. Send JSON command payloads to the MQTT command topic and receive responses on the response topic.
+﻿MQTT-based API for controlling Impinj Gen2X features on Zebra fixed RFID readers. 
 
 ## Overview
 
@@ -9,23 +9,13 @@ This tutorial provides a walk-through of the steps to use Impinj Gen2X tag featu
 - Tag Quieting
 - FastID
 
-## Details
+### Details
 
 Impinj Gen2X is an enhancement to Gen2's radio and logical layers. Impinj Gen2X tags are required to leverage these features with Gen2X-enabled Zebra RFID Readers.
 
 Users should verify whether their tags support these operations by referring to Impinj Gen2X tag specifications: [impinj.com/Gen2X](http://www.impinj.com/Gen2X)
 
-All Gen2X commands are sent as JSON payloads to the MQTT **command topic** and responses are received on the **response topic**. Each command uses the same top-level structure:
 
-```json
-{
-  "command": "set_impinjGen2X",
-  "command_id": "<uuid>",
-  "payload": { ... }
-}
-```
-
-The command_id (UUID) correlates each response back to its original request.
 
 ## Setting it up
 
