@@ -17,10 +17,75 @@ Set up your MQTT connection, broker, and topic before using this API. For setup 
 
 ## Get started
 
-1. **Authenticate** — Log in to the reader to get an authentication token. Include this token in all subsequent requests.
-2. **Check current state** — Send `get_gen2x_config` to see which Gen2X features are currently active on the reader.
-3. **Configure features** — Use the set commands below to configure the Gen2X features you want to use.
-4. **Stop the radio** — Stop the radio before applying configuration changes.
-5. **Start with Gen2X** — Send `start_with_gen2x` and set `applyImpinjGen2X` to `true` to apply your configuration and start the radio.
+1. **Check current state** — Send `get_gen2x_config` to see which Gen2X features are currently active on the reader.
+2. **Configure features** — Use the set commands below to configure the Gen2X features you want to use.
+3. **Stop the radio** — Stop the radio before applying configuration changes.
+4. **Start with Gen2X** — Send `start_with_gen2x` and set `applyImpinjGen2X` to `true` to apply your configuration and start the radio.
 
 > **Note:** You must stop the radio before applying Gen2X configuration changes. Starting the radio while it's already running returns an error.
+
+### Example
+
+The following example shows the full workflow — check config, configure a feature, stop the radio, then start with Gen2X applied.
+
+**Step 1 — Check the current Gen2X configuration**
+
+Publish to `rfid/cmd`:
+```json
+{
+  "command": "get_impinjGen2X",
+  "command_id": "9d744286-7b97-40b8-9e91-190df0334557",
+  "payload": {}
+}
+```
+
+**Step 2 — Configure a feature (example: enable FastID)**
+
+Publish to `rfid/cmd`:
+```json
+{
+  "command": "set_impinjGen2X",
+  "command_id": "657298d3-98de-421c-9b7c-ad3b53b7474f",
+  "payload": {
+    "fastID": {
+      "action": "enableFastID"
+    }
+  }
+}
+```
+
+**Step 3 — Stop the radio**
+
+Publish to `rfid/cmd`:
+```json
+{
+  "command": "stop",
+  "command_id": "c3f1a2b4-5678-4def-abcd-123456789abc",
+  "payload": {}
+}
+```
+
+**Step 4 — Start the radio with Gen2X applied**
+
+Publish to `rfid/cmd`:
+```json
+{
+  "command": "start",
+  "command_id": "81dd51a2-b0d3-4099-b46a-5a3f82796ba1",
+  "payload": {
+    "applyImpinjGen2X": true
+  }
+}
+```
+
+Subscribe to `rfid/resp` to receive the response for each command:
+```json
+{
+  "command": "start",
+  "command_id": "81dd51a2-b0d3-4099-b46a-5a3f82796ba1",
+  "payload": {
+    "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
+  },
+  "response": "success"
+}
+```
