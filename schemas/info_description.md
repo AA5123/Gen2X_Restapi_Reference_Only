@@ -17,8 +17,8 @@ Set up your MQTT connection, broker, and topic before using this API. For setup 
 
 ## Get started
 Follow these steps to configure and apply Gen2X features on the reader:
-1. **Check current state** — Send `get_impinjGen2X` to see which Gen2X features are currently active on the reader.
-2. **Configure features** — Send `set_impinjGen2X` to configure the Gen2X features you want to use.
-3. **Stop the radio** — Send the `stop` command to stop the radio before applying the configuration.
-4. **Start the radio** — Send the `start` command to apply the configuration and start the radio.
-5. **Verify configuration** — Send `get_impinjGen2X` to confirm that the changes have been applied.
+1. **Configure features** — Use the `set_impinjGen2X` command to stage the Gen2X features you want to enable (e.g., TagProtect, FastID, TagFocus).
+2. **Verify configuration** — Send `get_impinjGen2X` to confirm the staged settings are correct.
+3. **Stop the radio** — Send the `stop` command. The radio must be stopped before you can apply configuration changes.
+4. **Start with Gen2X** — Send the `start` command with `applyImpinjGen2X` set to `true`. This applies the staged Gen2X configuration and starts the radio.
+5. **Confirm applied state** — Send `get_impinjGen2X` again to verify the configuration is active on the reader.
