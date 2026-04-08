@@ -8,9 +8,11 @@
   <link href="https://fonts.googleapis.com/css?family=Inter:400,600,700,900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/custom-api.css?v=20260408-1" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/json-viewer-js@1.0.0/public/index.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+  <script src="https://unpkg.com/json-viewer-js@1.0.0/public/index.js"></script>
 </head>
 <body>
   <nav id="sidebar">
@@ -169,68 +171,25 @@
       });
     }
 
-    /* ── Add collapse toggle to all pre blocks ──────────────────── */
+    /* ── Render JSON with industry-standard json-viewer library ─── */
     function addCollapseToggles() {
-      document.querySelectorAll('pre:not([data-collapse-wired])').forEach(function (pre) {
-        pre.setAttribute('data-collapse-wired', '1');
-        var code = pre.querySelector('code');
-        if (!code) return;
-        
-        // Try to parse as JSON
+      document.querySelectorAll('pre > code.language-json:not([data-collapse-wired])').forEach(function (code) {
+        code.setAttribute('data-collapse-wired', '1');
         var text = code.textContent.trim();
         try {
           var json = JSON.parse(text);
-          // Successfully parsed - render as tree
-          var treeHtml = renderJsonTree(json, 0);
-          code.innerHTML = treeHtml;
-          
-          // Wire toggle buttons
-          code.querySelectorAll('.json-toggle').forEach(function(btn) {
-            btn.addEventListener('click', function(e) {
-              e.stopPropagation();
-              var container = btn.closest('.json-item');
-              var content = container.querySelector('.json-content');
-              var collapsed = btn.classList.toggle('collapsed');
-              content.style.display = collapsed ? 'none' : '';
-              btn.textContent = collapsed ? '+' : '−';
-            });
-          });
+          // Use json-viewer-js library to render with expand/collapse
+          if (typeof JSONViewer !== 'undefined') {
+            var pre = code.parentElement;
+            pre.innerHTML = '';
+            var viewer = new JSONViewer();
+            viewer.showString(text, null, 1);
+            pre.appendChild(viewer.getContainer());
+          }
         } catch(e) {
-          // Not JSON, leave as is
+          // Not JSON, leave as is with syntax highlighting
         }
       });
-    }
-    
-    function renderJsonTree(val, depth) {
-      var indent = '  '.repeat(depth);
-      var nextIndent = '  '.repeat(depth + 1);
-      
-      if (val === null) return '<span class="json-null">null</span>';
-      if (typeof val === 'boolean') return '<span class="json-bool">' + val + '</span>';
-      if (typeof val === 'number') return '<span class="json-num">' + val + '</span>';
-      if (typeof val === 'string') return '<span class="json-str">"' + escHtml(val) + '"</span>';
-      
-      if (Array.isArray(val)) {
-        if (val.length === 0) return '<span class="json-bracket">[]</span>';
-        var items = val.map(function(item, idx) {
-          var itemHtml = renderJsonTree(item, depth + 1);
-          return '<div class="json-item"><span class="json-index">[' + idx + ']</span>: ' + itemHtml + '</div>';
-        }).join('\n');
-        return '<span class="json-toggle">−</span><span class="json-bracket">[</span><div class="json-content" style="margin-left: 20px;">' + items + '</div><span class="json-bracket">]</span>';
-      }
-      
-      if (typeof val === 'object') {
-        var keys = Object.keys(val);
-        if (keys.length === 0) return '<span class="json-bracket">{}</span>';
-        var items = keys.map(function(key) {
-          var v = val[key];
-          var itemHtml = renderJsonTree(v, depth + 1);
-          return '<div class="json-item"><span class="json-key">"' + escHtml(key) + '"</span>: ' + itemHtml + '</div>';
-        }).join('\n');
-        return '<span class="json-toggle">−</span><span class="json-bracket">{</span><div class="json-content" style="margin-left: 20px;">' + items + '</div><span class="json-bracket">}</span>';
-      }
-      
-      return String(val);
     }
 
     /* ── Wire schema expand/collapse toggles ──────────── */
