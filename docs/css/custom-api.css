@@ -141,18 +141,17 @@ a:hover {
 
 /* ── Sidebar ───────────────────────────────────────────────────── */
 #sidebar-logo-bar {
-  background: #1a1a1a;
-  padding: var(--sp-4) var(--sp-4);
+  padding: var(--sp-3) var(--sp-4) 0;
 }
 
 #sidebar-logo {
-  height: 36px;
-  width: auto;
+  width: 140px;
+  height: auto;
   display: block;
 }
 
 #sidebar-header {
-  padding: var(--sp-4) var(--sp-4) var(--sp-3);
+  padding: var(--sp-2) var(--sp-4) var(--sp-3);
   border-bottom: 1px solid var(--color-border);
 }
 
