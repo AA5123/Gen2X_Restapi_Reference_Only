@@ -706,3 +706,60 @@ blockquote p:last-child {
   background: var(--color-code-bg);
   color: var(--color-code-text);
 }
+
+/* ── JSON tree syntax highlighting ─────────────────────────────── */
+.json-toggle {
+  cursor: pointer;
+  color: var(--color-primary);
+  font-weight: 700;
+  user-select: none;
+  padding: 0 4px;
+  display: inline-block;
+  min-width: 20px;
+}
+
+.json-toggle:hover {
+  color: var(--color-primary-hover);
+}
+
+.json-toggle.collapsed::after {
+  content: " (collapsed)";
+  font-size: 0.85em;
+  color: var(--color-text-muted);
+  margin-left: 4px;
+}
+
+.json-bracket {
+  color: #a0aec0;
+  font-weight: 600;
+}
+
+.json-key {
+  color: #90cdf4;
+}
+
+.json-str {
+  color: #68d391;
+}
+
+.json-num {
+  color: #f6ad55;
+}
+
+.json-bool {
+  color: #f687b3;
+}
+
+.json-null {
+  color: #cbd5e0;
+  font-style: italic;
+}
+
+.json-item {
+  margin: 4px 0;
+  line-height: 1.4;
+}
+
+.json-content {
+  padding-left: 20px;
+}
