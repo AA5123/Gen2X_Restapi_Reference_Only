@@ -32,11 +32,11 @@
             "quiet_tags",
             "unquiet_tags"
         ],
-        "Configuration": [
+        "Gen2X Configuration Retrieval": [
             "get_gen2x_config"
         ],
         "Control Commands": [
-            "start_with_gen2x",
+            "start",
             "stop"
         ]
     }

@@ -29,7 +29,7 @@
     "get_gen2x_config": {
         "Tested example": "Retrieve current Gen2X configuration"
     },
-    "start_with_gen2x": {
+    "start": {
         "Tested example": "Start radio with Gen2X features applied"
     }
 }

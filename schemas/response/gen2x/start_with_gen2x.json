@@ -1,5 +1,5 @@
 {
-    "title": "start_with_gen2x_response",
+    "title": "start",
     "description": "Response for start_with_gen2x command",
     "type": "object",
     "required": [
