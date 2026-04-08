@@ -1,0 +1,26 @@
+/* Expand/Collapse for code blocks */
+.code-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.95em;
+  color: #888;
+  margin-bottom: 2px;
+}
+.code-collapsed pre,
+.code-collapsed code {
+  display: none !important;
+}
+.code-toggle-btn {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 1.1em;
+  margin-right: 6px;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.2s;
+}
+.code-toggle-btn:hover {
+  color: #333;
+}

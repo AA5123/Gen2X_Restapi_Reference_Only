@@ -45,7 +45,8 @@
         .replace(/```([a-zA-Z0-9_-]+)?\n([\s\S]*?)```/g, function (_, lang, code) {
           var language = (lang || '').toLowerCase();
           var cls = language ? ' class="language-' + language + '"' : '';
-          return '<pre' + cls + '><code' + cls + '>' + escHtml(code.trim()) + '</code></pre>';
+          var toggle = '<div class="code-toggle"><button class="code-toggle-btn" aria-label="Expand/collapse code">−</button><span>Code</span></div>';
+          return '<div class="code-block-wrap">' + toggle + '<div class="code-block-content"><pre' + cls + '><code' + cls + '>' + escHtml(code.trim()) + '</code></pre></div></div>';
         })
         /* Blockquotes */
         .replace(/^> (.+)$/gm, '<blockquote><p>$1</p></blockquote>')
@@ -453,8 +454,20 @@
       });
 
       addCopyButtons();
+
       wireSchemaToggles();
       if (window.Prism) Prism.highlightAllUnder(document.getElementById('content'));
+
+      // Wire code block expand/collapse
+      document.querySelectorAll('.code-block-wrap').forEach(function (wrap) {
+        var btn = wrap.querySelector('.code-toggle-btn');
+        var content = wrap.querySelector('.code-block-content');
+        if (!btn || !content) return;
+        btn.addEventListener('click', function () {
+          var collapsed = wrap.classList.toggle('code-collapsed');
+          btn.textContent = collapsed ? '+' : '−';
+        });
+      });
 
       /* Wire example dropdowns */
       document.querySelectorAll('.example-select').forEach(function(sel) {
