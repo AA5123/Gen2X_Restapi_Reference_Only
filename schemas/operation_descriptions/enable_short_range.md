@@ -8,8 +8,3 @@ Send this command with the target tag's EPC ID, a 32-bit access password, and se
 - `tagID` (string): The unique EPC identifier of the tag to protect
 - `password` (string): A 32-bit (8-character hexadecimal) password for accessing the tag
 - `enableShortRange` (boolean): Set to `true` to limit tag response range to close proximity
-
-**Behavior:**
-- Tag enters protected mode with short-range behavior enabled
-- Tag responds only in close proximity and is silent at longer range
-- Protection and short-range settings remain active until changed

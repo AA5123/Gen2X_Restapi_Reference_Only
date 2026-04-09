@@ -6,8 +6,3 @@ Send this command after configuring your desired Gen2X settings (such as TagProt
 
 **Parameters:**
 - `applyImpinjGen2X` (boolean): Set to `true` to apply all staged Gen2X configurations
-
-**Behavior:**
-- Radio starts and applies staged Gen2X configuration
-- Configured features become active for inventory operations
-- Tag behavior follows the applied Gen2X settings

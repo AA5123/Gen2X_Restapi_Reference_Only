@@ -6,8 +6,3 @@ Send this command to deactivate TagFocus on the reader. Once disabled, all tags 
 
 **Parameters:**
 - `enabled` (boolean): Set to `false` to disable TagFocus feature
-
-**Behavior:**
-- All tags respond normally in each inventory round
-- Previously read tags are no longer suppressed
-- Duplicate reads can reappear in results

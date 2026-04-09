@@ -6,8 +6,3 @@ Send this command with an empty payload to query the reader's current Gen2X conf
 
 **Parameters:**
 - None (empty payload required)
-
-**Behavior:**
-- Returns the current stored Gen2X configuration
-- Includes feature states such as TagProtect, FastID, TagFocus, and Tag Quieting
-- Returns an empty object if no Gen2X configuration is set

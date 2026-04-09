@@ -6,8 +6,3 @@ Send this command with an empty payload to stop the reader radio. You must stop 
 
 **Parameters:**
 - None (empty payload required)
-
-**Behavior:**
-- Radio and RF inventory activity stop immediately
-- Reader enters idle state for safe configuration changes
-- New Gen2X settings apply on the next start with Gen2X enabled

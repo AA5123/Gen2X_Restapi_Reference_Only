@@ -7,7 +7,3 @@ Send this command to deactivate FastID on the reader. Once disabled, tags will o
 **Parameters:**
 - `enabled` (boolean): Set to `false` to disable FastID feature
 
-**Behavior:**
-- Tags return only EPC in standard inventory responses
-- TID requires a separate read operation when needed
-- FastID stays disabled until explicitly enabled again

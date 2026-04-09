@@ -7,8 +7,3 @@ Send this command with the target tag's EPC ID and a 32-bit access password. Onc
 **Parameters:**
 - `epc_id` (string): The unique EPC identifier of the tag to protect
 - `access_password` (string): A 32-bit (8-character hexadecimal) password required to unlock the tag
-
-**Behavior:**
-- Tag becomes RF silent and stops normal inventory responses
-- Gen2 access is blocked until the correct password is provided
-- Protection remains active until explicitly disabled

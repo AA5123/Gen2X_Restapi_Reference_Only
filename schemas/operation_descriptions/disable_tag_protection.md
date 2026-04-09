@@ -7,8 +7,3 @@ Send this command with the target tag's EPC ID and the 32-bit access password th
 **Parameters:**
 - `tagID` (string): The unique EPC identifier of the tag to unlock
 - `password` (string): A 32-bit (8-character hexadecimal) access password that matches the protection password
-
-**Behavior:**
-- Tag returns to normal, visible inventory behavior
-- Standard Gen2 operations are restored for all readers
-- No password-based protection remains on the tag

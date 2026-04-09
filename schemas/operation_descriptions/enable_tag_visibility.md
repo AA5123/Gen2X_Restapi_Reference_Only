@@ -6,8 +6,3 @@ Send this command with the 32-bit access password. The reader will use this pass
 
 **Parameters:**
 - `password` (string): A 32-bit (8-character hexadecimal) access password for authentication
-
-**Behavior:**
-- Reader authenticates and can inventory protected tags that match the password
-- Tags remain protected (this does not unlock or unprotect them)
-- Visibility stays enabled until explicitly disabled

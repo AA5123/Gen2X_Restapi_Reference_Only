@@ -1,4 +1,4 @@
-﻿Use this API to configure and control Impinj Gen2X features on Zebra fixed RFID readers over MQTT.
+﻿Use this guide to enable, configure, and manage Impinj Gen2X features on Zebra fixed RFID readers using MQTT. 
 
 ## Overview
 
@@ -15,8 +15,8 @@ Impinj Gen2X extends the Gen2 radio and logical layers. Your tags must support G
 
 Set up your MQTT connection, broker, and topic before using this API. For setup instructions, see the [Zebra IoTC MQTT Setup Guide](https://zebradevs.github.io/rfid-ziotc-docs/other_cloud_support/MQTT/index.html).
 
-
 ## Get started
+
 Follow these steps to configure and apply Gen2X features on the reader:
 
 1. **Check current state (optional)** — Send `get_impinjGen2X` to see which Gen2X features are currently active on the reader.

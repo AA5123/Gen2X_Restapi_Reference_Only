@@ -6,8 +6,3 @@ Send this command with the 32-bit access password to revoke the reader's visibil
 
 **Parameters:**
 - `password` (string): A 32-bit (8-character hexadecimal) access password for authentication
-
-**Behavior:**
-- Reader visibility authorization is revoked for protected tags
-- Protected tags no longer appear in inventory results
-- Tags remain protected and require re-enabling visibility to be inventoried

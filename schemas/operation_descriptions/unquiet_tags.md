@@ -9,8 +9,3 @@ Send this command with the EPC IDs of the tags you wish to restore. These must b
 - `tagIDs` (array): List of one or more EPC IDs as strings to restore
   - Minimum 1 tag required
   - Must match EPC IDs from original `quiet_tags` command
-
-**Behavior:**
-- Specified tags resume normal inventory participation
-- Tags not listed remain quiet
-- Restored tags stay active until quieted again

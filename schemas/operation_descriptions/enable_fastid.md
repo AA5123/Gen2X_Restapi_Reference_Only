@@ -6,8 +6,3 @@ Send this command to activate FastID on the reader. Once enabled, each tag inven
 
 **Parameters:**
 - `enabled` (boolean): Set to `true` to enable FastID feature
-
-**Behavior:**
-- Inventory responses include both EPC and TID in one read
-- Separate TID read operations are no longer required
-- FastID remains enabled until explicitly disabled

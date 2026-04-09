@@ -6,8 +6,3 @@ Send this command to activate TagFocus on the reader. Once enabled, any tag that
 
 **Parameters:**
 - `enabled` (boolean): Set to `true` to enable TagFocus feature
-
-**Behavior:**
-- Previously inventoried tags become non-responsive in subsequent rounds
-- Reader focuses on unread tags, reducing duplicate reads
-- Behavior applies to session S1 while TagFocus is enabled

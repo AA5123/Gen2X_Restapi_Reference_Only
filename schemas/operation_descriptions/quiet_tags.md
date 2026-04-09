@@ -10,7 +10,3 @@ Send this command with an array of one or more EPC IDs to quiet. Quieted tags wi
   - Minimum 1 tag required
   - Format: EPC ID strings matching tag identifier format
 
-**Behavior:**
-- Specified tags are silenced and stop participating in inventory rounds
-- Other tags continue normal operation unaffected
-- Quiet state persists until those tags are unquieted
