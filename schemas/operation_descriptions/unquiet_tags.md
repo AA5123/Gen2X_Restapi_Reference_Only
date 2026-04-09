@@ -8,4 +8,4 @@ Send this command with the EPC IDs of the tags you wish to restore. These must b
 - `action` (string): Set to `unquiet` to restore silenced tags
 - `tagIDs` (array): List of one or more EPC IDs as strings to restore
   - Minimum 1 tag required
-  - Must match EPC IDs from original `quiet_tags` command
+  - Must match EPC IDs from the original `quiet_tags` command request

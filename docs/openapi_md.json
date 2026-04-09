@@ -61,7 +61,7 @@
                     "Protected mode"
                 ],
                 "summary": "Enable Tag Protection",
-                "description": "﻿**Description:**\nLocks an RFID tag using a 32-bit access password to prevent unauthorized access and inventory operations.\n\n**Usage:**\nSend this command with the target tag's EPC ID and a 32-bit access password. Once enabled, the tag enters a protected state where it ceases to respond to standard inventory commands and becomes RF silent. The tag will remain inaccessible to Gen2 commands until a reader successfully authenticates with the correct access password.\n\n**Parameters:**\n- `epc_id` (string): The unique EPC identifier of the tag to protect\n- `access_password` (string): A 32-bit (8-character hexadecimal) password required to unlock the tag",
+                "description": "﻿**Description:**\nLocks an RFID tag using a 32-bit access password to prevent unauthorized access and inventory operations.\n\n**Usage:**\nSend this command with the target tag's EPC ID and a 32-bit access password. Once enabled, the tag enters a protected state where it ceases to respond to standard inventory commands and becomes RF silent. The tag will remain inaccessible to Gen2 commands until a reader successfully authenticates with the correct access password.\n\n**Parameters:**\n- `action` (string): Set to `enableTagProtection` to enable protected mode for the tag\n- `tagID` (string): The unique EPC identifier of the tag to protect\n- `password` (string): A 32-bit (8-character hexadecimal) password used for protected mode access",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -213,7 +213,7 @@
                     "Protected mode"
                 ],
                 "summary": "Disable Tag Protection",
-                "description": "﻿**Description:**\nUnlocks an RFID tag and removes the 32-bit access password protection, making it invisible mode disabled.\n\n**Usage:**\nSend this command with the target tag's EPC ID and the 32-bit access password that was used to enable protection. Once disabled, the tag returns to normal operation and responds to all standard inventory commands. The tag becomes discoverable and responsive to all readers without requiring authentication.\n\n**Parameters:**\n- `tagID` (string): The unique EPC identifier of the tag to unlock\n- `password` (string): A 32-bit (8-character hexadecimal) access password that matches the protection password",
+                "description": "﻿**Description:**\nDisables protected mode on an RFID tag and removes the 32-bit access password protection.\n\n**Usage:**\nSend this command with the target tag's EPC ID and the 32-bit access password that was used to enable protection. Once disabled, the tag returns to normal operation and responds to all standard inventory commands. The tag becomes discoverable and responsive to all readers without requiring authentication.\n\n**Parameters:**\n- `action` (string): Set to `disableTagProtection` to disable protected mode for the tag\n- `tagID` (string): The unique EPC identifier of the tag to remove protection from\n- `password` (string): A 32-bit (8-character hexadecimal) access password that matches the protection password",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -365,7 +365,7 @@
                     "Protected mode"
                 ],
                 "summary": "Enable Tag Visibility",
-                "description": "﻿**Description:**\nGrants the reader temporary authorization to see and read protected tags by providing the correct 32-bit access password.\n\n**Usage:**\nSend this command with the 32-bit access password. The reader will use this password to authenticate and unmask all protected tags that match this password during inventory rounds. This allows the reader to interact with protected tags without permanently unlocking them. The authorization persists until you use `disable_tag_visibility` or disconnect.\n\n**Parameters:**\n- `password` (string): A 32-bit (8-character hexadecimal) access password for authentication",
+                "description": "﻿**Description:**\nGrants the reader temporary authorization to see and read protected tags by providing the correct 32-bit access password.\n\n**Usage:**\nSend this command with the 32-bit access password. The reader will use this password to authenticate and unmask all protected tags that match this password during inventory rounds. This allows the reader to interact with protected tags without permanently unlocking them. The authorization persists until you use `disable_tag_visibility` or disconnect.\n\n**Parameters:**\n- `action` (string): Set to `enableTagVisibility` to allow inventory of protected tags\n- `password` (string): A 32-bit (8-character hexadecimal) access password for authentication",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -536,7 +536,7 @@
                     "Protected mode"
                 ],
                 "summary": "Disable Tag Visibility",
-                "description": "﻿**Description:**\nRevokes the reader's temporary authorization to see protected tags, restoring them to invisible status in inventory operations.\n\n**Usage:**\nSend this command with the 32-bit access password to revoke the reader's visibility permissions. After sending this command, the reader will no longer surface protected tags in inventory results, and protected tags return to RF silent status. This does not unlock the tags; it only prevents the reader from seeing them.\n\n**Parameters:**\n- `password` (string): A 32-bit (8-character hexadecimal) access password for authentication",
+                "description": "﻿**Description:**\nRevokes the reader's temporary authorization to see protected tags, restoring them to invisible status in inventory operations.\n\n**Usage:**\nSend this command with the 32-bit access password to revoke the reader's visibility permissions. After sending this command, the reader will no longer surface protected tags in inventory results, and protected tags return to RF silent status. This does not unlock the tags; it only prevents the reader from seeing them.\n\n**Parameters:**\n- `action` (string): Set to `disableTagVisibility` to stop inventory of protected tags\n- `password` (string): A 32-bit (8-character hexadecimal) access password for authentication",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -707,7 +707,7 @@
                     "Protected mode"
                 ],
                 "summary": "Enable Short Range",
-                "description": "﻿**Description:**\nProtects an RFID tag with a 32-bit access password and restricts its response range to short distance only, preventing reads from distant antennas.\n\n**Usage:**\nSend this command with the target tag's EPC ID, a 32-bit access password, and set `enableShortRange` to `true`. The tag enters a restricted mode where it only responds to readers in close physical proximity. This is ideal for precise point-of-sale operations, detailed inventory picking, or any scenario requiring location-specific tag reads. The tag remains protected and inaccessible to distant readers.\n\n**Parameters:**\n- `tagID` (string): The unique EPC identifier of the tag to protect\n- `password` (string): A 32-bit (8-character hexadecimal) password for accessing the tag\n- `enableShortRange` (boolean): Set to `true` to limit tag response range to close proximity",
+                "description": "﻿**Description:**\nProtects an RFID tag with a 32-bit access password and restricts its response range to short distance only, preventing reads from distant antennas.\n\n**Usage:**\nSend this command with the target tag's EPC ID, a 32-bit access password, and set `enableShortRange` to `true`. The tag enters a restricted mode where it only responds to readers in close physical proximity. This is ideal for precise point-of-sale operations, detailed inventory picking, or any scenario requiring location-specific tag reads. The tag remains protected and inaccessible to distant readers.\n\n**Parameters:**\n- `action` (string): Set to `enableTagProtection` to enable protected mode with short-range behavior\n- `tagID` (string): The unique EPC identifier of the tag to protect\n- `password` (string): A 32-bit (8-character hexadecimal) password for accessing the tag\n- `enableShortRange` (boolean): Set to `true` to limit tag response range to close proximity",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1518,7 +1518,7 @@
                     "Tag Quieting"
                 ],
                 "summary": "Quiet Tags",
-                "description": "﻿**Description:**\nSelectively silences one or more specific tags by their EPC ID, preventing them from responding to inventory rounds without affecting other tags.\n\n**Usage:**\nSend this command with an array of one or more EPC IDs to quiet. Quieted tags will not participate in inventory responses and will not transmit RF signals to the reader. This is useful for isolating problematic tags, managing high-density inventory operations, or testing specific tag subsets. Quieted tags remain silent until explicitly restored with `unquiet_tags`. You can quiet up to the maximum number of tags supported by your reader configuration.\n\n**Parameters:**\n- `action` (string): Set to `quiet` to silence tags\n- `tagIDs` (array): List of one or more EPC IDs as strings to silence\n  - Minimum 1 tag required\n  - Format: EPC ID strings matching tag identifier format",
+                "description": "﻿**Description:**\nSelectively silences one or more specific tags by their EPC ID, preventing them from responding to inventory rounds without affecting other tags.\n\n**Usage:**\nSend this command with an array of one or more EPC IDs to quiet. Quieted tags will not participate in inventory responses and will not transmit RF signals to the reader. This is useful for isolating problematic tags, managing high-density inventory operations, or testing specific tag subsets. Quieted tags remain silent until explicitly restored with the `unquiet_tags` command. You can quiet up to 31 tag EPCs in a single command.\n\n**Parameters:**\n- `action` (string): Set to `quiet` to silence tags\n- `tagIDs` (array): List of one or more EPC IDs as strings to silence\n  - Minimum 1 tag required\n  - Format: EPC ID strings matching tag identifier format",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1701,7 +1701,7 @@
                     "Tag Quieting"
                 ],
                 "summary": "Unquiet Tags",
-                "description": "﻿**Description:**\nRestores previously silenced tags, allowing them to resume normal participation in inventory rounds.\n\n**Usage:**\nSend this command with the EPC IDs of the tags you wish to restore. These must be the same EPC IDs you provided to the `quiet_tags` command. Once sent, the specified tags will resume responding to inventory operations and will transmit RF signals normally. You can restore individual tags or multiple tags in a single command. Tags not explicitly restored remain in quiet state.\n\n**Parameters:**\n- `action` (string): Set to `unquiet` to restore silenced tags\n- `tagIDs` (array): List of one or more EPC IDs as strings to restore\n  - Minimum 1 tag required\n  - Must match EPC IDs from original `quiet_tags` command",
+                "description": "﻿**Description:**\nRestores previously silenced tags, allowing them to resume normal participation in inventory rounds.\n\n**Usage:**\nSend this command with the EPC IDs of the tags you wish to restore. These must be the same EPC IDs you provided to the `quiet_tags` command. Once sent, the specified tags will resume responding to inventory operations and will transmit RF signals normally. You can restore individual tags or multiple tags in a single command. Tags not explicitly restored remain in quiet state.\n\n**Parameters:**\n- `action` (string): Set to `unquiet` to restore silenced tags\n- `tagIDs` (array): List of one or more EPC IDs as strings to restore\n  - Minimum 1 tag required\n  - Must match EPC IDs from the original `quiet_tags` command request",
                 "requestBody": {
                     "required": true,
                     "content": {
