@@ -1,4 +1,4 @@
-﻿Use TagFocus to improve read rates in dense tag environments. After a tag is inventoried, it stays silent in subsequent rounds so the reader can focus on new or unread tags. TagFocus targets tags in session S1.
+﻿Impinj tag focus is a feature that instructs a tag to continue to refresh their A/B flag setting such that they remain in a non-responsive state. By instructing tags that have already been inventoried to remain unresponsive while searching for tags not yet inventoried, the reader has a far greater chance of finding difficult-to-read tags.  TagFocus targets tags inventoried in session S1.
 
 **Key Features:**
 - **Post-Read Suppression**: Already inventoried tags remain non-responsive
