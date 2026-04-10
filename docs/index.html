@@ -430,8 +430,8 @@
           reqHtml = '<div class="payload-section">';
           reqHtml += '<div class="payload-heading">MQTT Command Payload</div>';
           reqHtml += '<div class="tab-bar">';
-          if (reqExampleJson) reqHtml += '<button class="tab-btn active" data-tab="req-ex-' + id + '">Example</button>';
-          if (schemaHtml) reqHtml += '<button class="tab-btn" data-tab="req-sc-' + id + '">Schema</button>';
+          if (reqExampleJson) reqHtml += '<button class="tab-btn active" data-tab="req-ex-' + id + '">MQTT Example</button>';
+          if (schemaHtml) reqHtml += '<button class="tab-btn" data-tab="req-sc-' + id + '">MQTT Schema</button>';
           if (restReqExampleJson) reqHtml += '<button class="tab-btn" data-tab="req-rest-ex-' + id + '">REST Example</button>';
           if (restReqSchemaJson) reqHtml += '<button class="tab-btn" data-tab="req-rest-sc-' + id + '">REST Schema</button>';
           reqHtml += '</div>';
@@ -457,8 +457,8 @@
           resHtml += '<div class="payload-heading">MQTT Response Payload</div>';
           if (resExKeys.length || resSchemaHtml) {
             resHtml += '<div class="tab-bar">';
-            if (resExKeys.length) resHtml += '<button class="tab-btn active" data-tab="res-ex-' + id + '">Example</button>';
-            if (resSchemaHtml) resHtml += '<button class="tab-btn" data-tab="res-sc-' + id + '">Schema</button>';
+            if (resExKeys.length) resHtml += '<button class="tab-btn active" data-tab="res-ex-' + id + '">MQTT Example</button>';
+            if (resSchemaHtml) resHtml += '<button class="tab-btn" data-tab="res-sc-' + id + '">MQTT Schema</button>';
             if (restResExampleJson) resHtml += '<button class="tab-btn" data-tab="res-rest-ex-' + id + '">REST Example</button>';
             if (restResSchemaJson) resHtml += '<button class="tab-btn" data-tab="res-rest-sc-' + id + '">REST Schema</button>';
             resHtml += '</div>';
