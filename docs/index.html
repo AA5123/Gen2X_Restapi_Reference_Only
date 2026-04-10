@@ -338,6 +338,71 @@
       var summary = op.summary || path;
       var id = slugify(summary);
       var desc = op.description || '';
+      var isEnableTagProtectionOp = summary === 'Enable Impinj Protected Mode' || path === '/enable_tag_protection';
+
+      /* REST-only artifacts for Enable Impinj Protected Mode */
+      var restReqExampleJson = '';
+      var restReqSchemaJson = '';
+      var restResExampleJson = '';
+      var restResSchemaJson = '';
+      if (isEnableTagProtectionOp) {
+        restReqExampleJson = JSON.stringify({
+          tagProtect: {
+            action: 'enableTagProtection',
+            password: '77777777',
+            tagID: 'e2801191a5030069073b426d',
+            enableShortRange: true
+          }
+        }, null, 2);
+
+        restReqSchemaJson = JSON.stringify({
+          $schema: 'https://json-schema.org/draft/2020-12/schema',
+          title: 'Enable Impinj Protected Mode Request',
+          type: 'object',
+          required: ['tagProtect'],
+          properties: {
+            tagProtect: {
+              type: 'object',
+              required: ['action', 'password', 'tagID'],
+              properties: {
+                action: {
+                  type: 'string',
+                  const: 'enableTagProtection',
+                  description: 'Sets a tag to protected mode.'
+                },
+                password: {
+                  type: 'string',
+                  description: '8-character hexadecimal 32-bit password used for tag protection.',
+                  minLength: 8,
+                  maxLength: 8,
+                  pattern: '^[0-9A-Fa-f]{8}$'
+                },
+                tagID: {
+                  type: 'string',
+                  description: 'Hexadecimal tagID (EPC) of the target tag.',
+                  pattern: '^[0-9A-Fa-f]+$'
+                },
+                enableShortRange: {
+                  type: 'boolean',
+                  description: 'Enables short-range protection mode for higher security.'
+                }
+              },
+              additionalProperties: false
+            }
+          },
+          additionalProperties: false
+        }, null, 2);
+
+        restResExampleJson = JSON.stringify('', null, 2);
+
+        restResSchemaJson = JSON.stringify({
+          $schema: 'https://json-schema.org/draft/2020-12/schema',
+          title: 'Enable Impinj Protected Mode Success Response',
+          description: 'From PUT /cloud/impinjGen2X 200 response in docs/rest_openapi.yaml',
+          type: 'string',
+          examples: ['']
+        }, null, 2);
+      }
 
       /* Extract example JSONs for REST tabs */
       var reqExampleJson = '';
@@ -362,9 +427,13 @@
           reqHtml += '<div class="tab-bar">';
           if (reqExampleJson) reqHtml += '<button class="tab-btn active" data-tab="req-ex-' + id + '">Example</button>';
           if (schemaHtml) reqHtml += '<button class="tab-btn" data-tab="req-sc-' + id + '">Schema</button>';
+          if (restReqExampleJson) reqHtml += '<button class="tab-btn" data-tab="req-rest-ex-' + id + '">REST Example</button>';
+          if (restReqSchemaJson) reqHtml += '<button class="tab-btn" data-tab="req-rest-sc-' + id + '">REST Schema</button>';
           reqHtml += '</div>';
           if (reqExampleJson) reqHtml += '<div class="tab-panel active" id="req-ex-' + id + '"><pre class="language-json"><code class="language-json">' + escHtml(reqExampleJson) + '</code></pre></div>';
           if (schemaHtml) reqHtml += '<div class="tab-panel" id="req-sc-' + id + '">' + schemaHtml + '</div>';
+          if (restReqExampleJson) reqHtml += '<div class="tab-panel" id="req-rest-ex-' + id + '"><pre class="language-json"><code class="language-json">' + escHtml(restReqExampleJson) + '</code></pre></div>';
+          if (restReqSchemaJson) reqHtml += '<div class="tab-panel" id="req-rest-sc-' + id + '"><pre class="language-json"><code class="language-json">' + escHtml(restReqSchemaJson) + '</code></pre></div>';
           reqHtml += '</div>';
         }
       }
@@ -385,6 +454,8 @@
             resHtml += '<div class="tab-bar">';
             if (resExKeys.length) resHtml += '<button class="tab-btn active" data-tab="res-ex-' + id + '">Example</button>';
             if (resSchemaHtml) resHtml += '<button class="tab-btn" data-tab="res-sc-' + id + '">Schema</button>';
+            if (restResExampleJson) resHtml += '<button class="tab-btn" data-tab="res-rest-ex-' + id + '">REST Example</button>';
+            if (restResSchemaJson) resHtml += '<button class="tab-btn" data-tab="res-rest-sc-' + id + '">REST Schema</button>';
             resHtml += '</div>';
             if (resExKeys.length) {
               resHtml += '<div class="tab-panel active" id="res-ex-' + id + '">';
@@ -399,6 +470,8 @@
               resHtml += '</div>';
             }
             if (resSchemaHtml) resHtml += '<div class="tab-panel" id="res-sc-' + id + '">' + resSchemaHtml + '</div>';
+            if (restResExampleJson) resHtml += '<div class="tab-panel" id="res-rest-ex-' + id + '"><pre class="language-json"><code class="language-json">' + escHtml(restResExampleJson) + '</code></pre></div>';
+            if (restResSchemaJson) resHtml += '<div class="tab-panel" id="res-rest-sc-' + id + '"><pre class="language-json"><code class="language-json">' + escHtml(restResSchemaJson) + '</code></pre></div>';
           }
           resHtml += '</div>';
         }
