@@ -1,7 +1,7 @@
 {
     "title": "disable_tag_visibility",
     "description": "Revokes the reader's ability to see protected tags.",
-    "x-tag": "Tag Protection",
+    "x-tag": "Protected Mode",
     "type": "object",
     "required": [
         "command",

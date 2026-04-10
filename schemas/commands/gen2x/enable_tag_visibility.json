@@ -1,7 +1,7 @@
 {
     "title": "enable_tag_visibility",
     "description": "Allows the reader to see protected tags by providing the access password.",
-    "x-tag": "Tag Protection",
+    "x-tag": "Protected Mode",
     "type": "object",
     "required": [
         "command",

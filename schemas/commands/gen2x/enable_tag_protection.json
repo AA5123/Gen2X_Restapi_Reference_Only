@@ -1,7 +1,7 @@
 {
   "title": "enable_tag_protection",
   "description": "Locks a specific tag using Impinj TagProtect so it becomes invisible to all readers that do not have the correct password.",
-  "x-tag": "Tag Protection",
+  "x-tag": "Protected Mode",
   "type": "object",
   "required": ["command", "command_id", "payload"],
   "properties": {
