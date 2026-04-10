@@ -1,6 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Enable Impinj Protected Mode Request",
+  "description": "REST request schema for PUT /cloud/impinjGen2X (setImpinjGen2X)",
+  "x-method": "PUT",
+  "x-path": "/cloud/impinjGen2X",
+  "x-operationId": "setImpinjGen2X",
+  "x-contentType": "application/json",
   "type": "object",
   "required": [
     "tagProtect"
