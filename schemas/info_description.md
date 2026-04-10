@@ -9,7 +9,6 @@ This tutorial provides a walk-through of the steps to use Impinj Gen2X tag featu
 - **TagFocus** — Silence already-read tags so the reader focuses on new ones. *(reader-scoped — applies to all inventory operations)*
 - **Tag Quieting** — Silence specific tags by EPC ID. *(tag-scoped — applies to specific tags by EPC)*
 
-> **Reader-scoped** features (FastID, TagFocus) change the reader's general inventory behavior and affect all tags. **Tag-scoped** features (Protected Mode, Tag Quieting) target individual tags identified by their EPC.
 
 Impinj Gen2X extends the Gen2 radio and logical layers. Your tags must support Gen2X to use these features. To check whether your tags are compatible, see the [Impinj Gen2X tag specifications](http://www.impinj.com/Gen2X).
 
