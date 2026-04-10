@@ -789,35 +789,3 @@ blockquote p:last-child {
   overflow: auto;
 }
 
-/* ── Download as PDF button ──────────────────────────────────── */
-#download-pdf-btn {
-  display: block;
-  margin-top: var(--sp-2);
-  padding: 6px 14px;
-  font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--color-primary);
-  background: var(--color-primary-bg);
-  border: 1px solid var(--color-primary);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
-}
-#download-pdf-btn:hover {
-  background: var(--color-primary);
-  color: #fff;
-}
-
-/* ── Print / PDF styles ──────────────────────────────────────── */
-@media print {
-  #sidebar, #font-scale-panel, #download-pdf-btn { display: none !important; }
-  #main { margin: 0; padding: 0; width: 100%; }
-  body { font-size: 11pt; color: #000; background: #fff; }
-  .endpoint-card { break-inside: avoid; border: 1px solid #ccc; margin-bottom: 12pt; }
-  pre, code { font-size: 9pt; }
-  a { color: #000; text-decoration: underline; }
-
-  /* Force all schema rows visible (overrides inline display:none from JS collapse) */
-  .schema-row { display: table-row !important; }
-  .schema-toggle-inline, .schema-toolbar { display: none !important; }
-}
