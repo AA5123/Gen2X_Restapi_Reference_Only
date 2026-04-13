@@ -65,20 +65,27 @@ REST_ENDPOINT = {
 
 # ── REST staging notes (shown below endpoint table) ───────────────────────────
 REST_NOTES = {
-    "enable_tag_protection":  "This request stages TagProtect settings. Use `PUT /cloud/start` with `applyImpinjGen2X: true` to apply staged settings.",
-    "disable_tag_protection": "This request stages TagProtect settings. Use `PUT /cloud/start` with `applyImpinjGen2X: true` to apply staged settings.",
-    "enable_tag_visibility":  "This request stages TagProtect settings. Use `PUT /cloud/start` with `applyImpinjGen2X: true` to apply staged settings.",
-    "disable_tag_visibility": "This request stages TagProtect settings. Use `PUT /cloud/start` with `applyImpinjGen2X: true` to apply staged settings.",
-    "enable_short_range":     "This request stages TagProtect settings. Use `PUT /cloud/start` with `applyImpinjGen2X: true` to apply staged settings.",
-    "enable_fastid":          "This request stages FastID settings. Use `PUT /cloud/start` with `applyImpinjGen2X: true` to apply staged settings.",
-    "disable_fastid":         "This request stages FastID settings. Use `PUT /cloud/start` with `applyImpinjGen2X: true` to apply staged settings.",
-    "enable_tagfocus":        "This request stages TagFocus settings. Use `PUT /cloud/start` with `applyImpinjGen2X: true` to apply staged settings.",
-    "disable_tagfocus":       "This request stages TagFocus settings. Use `PUT /cloud/start` with `applyImpinjGen2X: true` to apply staged settings.",
-    "quiet_tags":             "This request stages Tag Quieting settings. Use `PUT /cloud/start` with `applyImpinjGen2X: true` to apply staged settings.",
-    "unquiet_tags":           "This request stages Tag Quieting settings. Use `PUT /cloud/start` with `applyImpinjGen2X: true` to apply staged settings.",
-    "get_gen2x_config":       "Returns the current Gen2X configuration as last saved. Returns an empty object if no configuration has been set.",
-    "start":                  "Set `applyImpinjGen2X: true` to apply all previously staged Gen2X settings when starting the radio.",
-    "stop":                   "Stop the radio before making any Gen2X configuration changes.",
+    "enable_tag_protection":  "",
+    "disable_tag_protection": "",
+    "enable_tag_visibility":  "",
+    "disable_tag_visibility": "",
+    "enable_short_range":     "",
+    "enable_fastid":          "",
+    "disable_fastid":         "",
+    "enable_tagfocus":        "",
+    "disable_tagfocus":       "",
+    "quiet_tags":             "",
+    "unquiet_tags":           "",
+    "get_gen2x_config":       "",
+    "start":                  "",
+    "stop":                   "",
+}
+
+# Always render one combined parameter section for these operations.
+FORCE_MERGED_PARAMS = {
+    "enable_tag_protection",
+    "enable_tag_visibility",
+    "disable_tag_visibility",
 }
 
 
@@ -101,9 +108,6 @@ def parse_existing_md(text):
 
     desc = extract_section("Description", text)
     usage = extract_section("Usage", text)
-    persist = extract_section("Persistence", text)
-    if persist:
-        usage += f"\n\n**Persistence:** {persist}"
     return desc, usage
 
 
@@ -204,7 +208,12 @@ def generate(op_name):
     # Merge params if MQTT and REST field names are identical
     mqtt_names = {r["name"] for r in mqtt_leaf}
     rest_names = {r["name"] for r in rest_leaf}
-    merged = (mqtt_names == rest_names)
+    merged = (mqtt_names == rest_names) or (op_name in FORCE_MERGED_PARAMS)
+
+    # For forced-merged operations, keep only parameters common to both protocols.
+    if op_name in FORCE_MERGED_PARAMS:
+        common_names = rest_names.intersection(mqtt_names)
+        mqtt_leaf = [r for r in mqtt_leaf if r["name"] in common_names]
 
     # MQTT endpoint HTML block — single <div> passes md() block check unchanged
     mqtt_block = (

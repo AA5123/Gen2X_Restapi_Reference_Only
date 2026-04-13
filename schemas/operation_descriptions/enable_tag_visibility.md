@@ -4,17 +4,11 @@ Enable Inventory of Protected Tags — Grants the reader authorization to invent
 **Usage:**
 Send this command with the 32-bit access password. The reader will use this password to authenticate and unmask all protected tags that match during inventory rounds. This allows the reader to interact with protected tags without permanently removing their Protected Mode.
 
-**MQTT Parameters:**
+**Parameters (MQTT & REST):**
 
 - **action** (string): Enables the reader to read protected tags Must be `enableTagVisibility`.
 - **password** (string): 8-character hexadecimal 32-bit password
 
-**REST Parameters:**
-
-- **action** (string): Enables the reader to read protected tags. Must be `enableTagVisibility`.
-- **password** (string): 8-character hexadecimal 32-bit password.
-- **enableShortRange** (boolean): Enables short-range protection mode for higher security.
-
 <div class="endpoint-block"><div class="ep-heading ep-mqtt">MQTT Endpoint Details</div><table class="endpoint-table"><tbody><tr><td>Command</td><td><code>set_impinjGen2X</code></td></tr></tbody></table></div>
 
-<div class="endpoint-block"><div class="ep-heading ep-rest">REST Endpoint Details</div><table class="endpoint-table"><tbody><tr><td>Method</td><td><span class="ep-method ep-method-put">PUT</span></td></tr><tr><td>Path</td><td><code>/cloud/impinjGen2X</code></td></tr><tr><td>OperationId</td><td><code>setImpinjGen2X</code></td></tr><tr><td>Content-Type</td><td><code>application/json</code></td></tr></tbody></table><p class="ep-note">This request stages TagProtect settings. Use `PUT /cloud/start` with `applyImpinjGen2X: true` to apply staged settings.</p></div>
+<div class="endpoint-block"><div class="ep-heading ep-rest">REST Endpoint Details</div><table class="endpoint-table"><tbody><tr><td>Method</td><td><span class="ep-method ep-method-put">PUT</span></td></tr><tr><td>Path</td><td><code>/cloud/impinjGen2X</code></td></tr><tr><td>OperationId</td><td><code>setImpinjGen2X</code></td></tr><tr><td>Content-Type</td><td><code>application/json</code></td></tr></tbody></table></div>

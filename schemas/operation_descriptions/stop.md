@@ -10,4 +10,4 @@ _No parameters required._
 
 <div class="endpoint-block"><div class="ep-heading ep-mqtt">MQTT Endpoint Details</div><table class="endpoint-table"><tbody><tr><td>Command</td><td><code>stop</code></td></tr></tbody></table></div>
 
-<div class="endpoint-block"><div class="ep-heading ep-rest">REST Endpoint Details</div><table class="endpoint-table"><tbody><tr><td>Method</td><td><span class="ep-method ep-method-put">PUT</span></td></tr><tr><td>Path</td><td><code>/cloud/stop</code></td></tr><tr><td>OperationId</td><td><code>stopIotCloudService</code></td></tr><tr><td>Content-Type</td><td><code>application/json</code></td></tr></tbody></table><p class="ep-note">Stop the radio before making any Gen2X configuration changes.</p></div>
+<div class="endpoint-block"><div class="ep-heading ep-rest">REST Endpoint Details</div><table class="endpoint-table"><tbody><tr><td>Method</td><td><span class="ep-method ep-method-put">PUT</span></td></tr><tr><td>Path</td><td><code>/cloud/stop</code></td></tr><tr><td>OperationId</td><td><code>stopIotCloudService</code></td></tr><tr><td>Content-Type</td><td><code>application/json</code></td></tr></tbody></table></div>
