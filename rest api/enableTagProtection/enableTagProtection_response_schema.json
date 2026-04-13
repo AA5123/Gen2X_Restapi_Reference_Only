@@ -1,5 +1,4 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Enable Impinj Protected Mode Success Response",
   "description": "From PUT /cloud/impinjGen2X 200 response in docs/rest_openapi.yaml",
   "type": "string",

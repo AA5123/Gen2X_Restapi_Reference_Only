@@ -1,11 +1,6 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Enable Impinj Protected Mode Request",
-  "description": "REST request schema for PUT /cloud/impinjGen2X (setImpinjGen2X)",
-  "x-method": "PUT",
-  "x-path": "/cloud/impinjGen2X",
-  "x-operationId": "setImpinjGen2X",
-  "x-contentType": "application/json",
+  "description": "Request payload for enabling TagProtect on a specific tag.",
   "type": "object",
   "required": [
     "tagProtect"
@@ -13,6 +8,7 @@
   "properties": {
     "tagProtect": {
       "type": "object",
+      "description": "TagProtect configuration for enabling protection on a target tag.",
       "required": [
         "action",
         "password",
@@ -34,7 +30,7 @@
         "tagID": {
           "type": "string",
           "description": "Hexadecimal tagID (EPC) of the target tag.",
-          "pattern": "^[0-9A-Fa-f]+$"
+          "pattern": "^(?:[0-9A-Fa-f]{2})+$"
         },
         "enableShortRange": {
           "type": "boolean",
@@ -44,5 +40,15 @@
       "additionalProperties": false
     }
   },
+  "examples": [
+    {
+      "tagProtect": {
+        "action": "enableTagProtection",
+        "password": "77777777",
+        "tagID": "e2801191a5030069073b426d",
+        "enableShortRange": true
+      }
+    }
+  ],
   "additionalProperties": false
 }
