@@ -90,9 +90,12 @@ def load_json(path):
 
 
 def parse_existing_md(text):
-    """Extract Description, Usage, and Persistence from existing .md file."""
+    """Extract Description, Usage, and Persistence from existing .md file.
+    Stops at '---', HTML tags, or the next bold heading to avoid picking up
+    generated endpoint/parameter blocks from a previous run.
+    """
     def extract_section(heading, src):
-        pattern = rf"\*\*{re.escape(heading)}:\*\*\s*\n(.*?)(?=\n\*\*[A-Z]|\Z)"
+        pattern = rf"\*\*{re.escape(heading)}:\*\*\s*\n(.*?)(?=\n\*\*[A-Z]|\n---|\n<|\Z)"
         m = re.search(pattern, src, re.DOTALL)
         return m.group(1).strip() if m else ""
 
@@ -104,83 +107,61 @@ def parse_existing_md(text):
     return desc, usage
 
 
-def flatten_props(schema, prefix="", parent_required=None):
+def leaf_params_for_bullets(schema):
     """
-    Recursively flatten JSON schema properties into rows:
-    [{name, type, required, description}, ...]
+    Recursively extract leaf (non-object) parameters for bullet-list display.
+    Skips object-wrapper fields, showing only concrete typed leaf fields.
     """
     if not schema:
         return []
     props = schema.get("properties", {})
-    if not props:
-        return []
-    required = parent_required if parent_required is not None else schema.get("required", [])
+    required = schema.get("required", [])
     rows = []
     for key, prop in props.items():
-        full = f"{prefix}.{key}" if prefix else key
         ptype = prop.get("type", "object")
-
-        desc = prop.get("description", "")
-        if "const" in prop:
-            desc = (desc + f" Must be `{prop['const']}`").strip()
-        if prop.get("enum") and "const" not in prop:
-            enums = ", ".join(f"`{v}`" for v in prop["enum"])
-            desc = (desc + f" One of: {enums}.").strip()
-        if prop.get("minLength") and prop.get("maxLength"):
-            desc = (desc + f" ({prop['minLength']}–{prop['maxLength']} chars)").strip()
-        elif prop.get("minLength"):
-            desc = (desc + f" (min {prop['minLength']} chars)").strip()
-        elif prop.get("maxLength"):
-            desc = (desc + f" (max {prop['maxLength']} chars)").strip()
-        if prop.get("pattern"):
-            desc = (desc + f" Pattern: `{prop['pattern']}`").strip()
-        if prop.get("format"):
-            desc = (desc + f" Format: {prop['format']}").strip()
-
-        is_required = key in required
-
         if ptype == "object" and "properties" in prop:
-            rows.append({"name": full, "type": "object", "required": is_required, "description": desc})
-            child_req = prop.get("required", [])
-            rows.extend(flatten_props(prop, full, child_req))
-        elif ptype == "array":
-            items = prop.get("items", {})
-            item_type = items.get("type", "string") if items else "string"
-            desc = (desc + f" Array of {item_type} values.").strip()
-            rows.append({"name": full, "type": "array", "required": is_required, "description": desc})
+            child_schema = dict(prop)
+            child_schema.setdefault("required", [])
+            rows.extend(leaf_params_for_bullets(child_schema))
         else:
-            rows.append({"name": full, "type": ptype, "required": is_required, "description": desc})
+            desc = prop.get("description", "")
+            const = prop.get("const")
+            if const is not None:
+                desc = (desc + f" Must be `{const}`.").strip()
+            elif prop.get("enum") and "const" not in prop:
+                vals = ", ".join(f"`{v}`" for v in prop["enum"])
+                desc = (desc + f" One of: {vals}.").strip()
+            rows.append({
+                "name": key,
+                "type": ptype,
+                "required": key in required,
+                "description": desc,
+            })
     return rows
 
 
-def params_table(rows):
-    """Render a list of param rows as a markdown table."""
+def params_bullets(rows):
+    """Render parameter rows as a markdown bullet list."""
     if not rows:
-        return "_No parameters required._\n"
-    lines = [
-        "| Parameter | Type | Required | Description |",
-        "|-----------|------|:--------:|-------------|",
-    ]
-    for r in rows:
-        req = "Yes" if r["required"] else "No"
-        desc = r["description"] or ""
-        lines.append(f"| `{r['name']}` | {r['type']} | {req} | {desc} |")
-    return "\n".join(lines) + "\n"
+        return "_No parameters required._"
+    return "\n".join(
+        f"- **{r['name']}** ({r['type']}): {r['description']}"
+        for r in rows
+    )
 
 
-def mqtt_params_from_cmd(cmd_schema):
-    """Extract only payload-level parameters (skip command/command_id)."""
-    payload = cmd_schema.get("properties", {}).get("payload", {})
-    payload_req = payload.get("required", [])
-    return flatten_props(payload, "", payload_req)
+def html_endpoint_table(row_pairs):
+    """Build an HTML endpoint detail table from (label, value_html) pairs."""
+    inner = "".join(
+        f"<tr><td>{label}</td><td>{value}</td></tr>"
+        for label, value in row_pairs
+    )
+    return f'<table class="endpoint-table"><tbody>{inner}</tbody></table>'
 
 
-def rest_params_from_schema(rest_schema):
-    """Extract REST request parameters from request_schema JSON."""
-    if not rest_schema:
-        return []
-    top_req = rest_schema.get("required", [])
-    return flatten_props(rest_schema, "", top_req)
+def method_badge_html(method):
+    cls = f"ep-method ep-method-{method.lower()}"
+    return f'<span class="{cls}">{method}</span>'
 
 
 def get_mqtt_command_name(cmd_schema):
@@ -194,7 +175,7 @@ def get_mqtt_command_name(cmd_schema):
 # ── Main generator ────────────────────────────────────────────────────────────
 
 def generate(op_name):
-    # Load existing narrative
+    # Load existing description/usage narrative
     md_path = os.path.join(OP_DESC_DIR, f"{op_name}.md")
     if os.path.exists(md_path):
         with open(md_path, encoding="utf-8") as f:
@@ -207,98 +188,68 @@ def generate(op_name):
     cmd_path = os.path.join(CMD_DIR, f"{op_name}.json")
     cmd_schema = load_json(cmd_path) if os.path.exists(cmd_path) else {}
     mqtt_cmd = get_mqtt_command_name(cmd_schema)
-    mqtt_params = mqtt_params_from_cmd(cmd_schema)
+    mqtt_payload = cmd_schema.get("properties", {}).get("payload", {})
+    mqtt_leaf = leaf_params_for_bullets(mqtt_payload)
 
     # Load REST request schema
     rest_folder = OP_TO_REST.get(op_name, "")
     rest_schema_path = os.path.join(REST_API_DIR, rest_folder, f"{rest_folder}_request_schema.json")
     rest_schema = load_json(rest_schema_path) if os.path.exists(rest_schema_path) else {}
-    rest_params = rest_params_from_schema(rest_schema)
+    rest_leaf = leaf_params_for_bullets(rest_schema)
 
     # REST endpoint details
     method, path, op_id = REST_ENDPOINT.get(op_name, ("PUT", "/cloud/impinjGen2X", "setImpinjGen2X"))
     rest_note = REST_NOTES.get(op_name, "")
 
-    # ── Build markdown ────────────────────────────────────────────────────────
-    lines = []
+    # Merge params if MQTT and REST field names are identical
+    mqtt_names = {r["name"] for r in mqtt_leaf}
+    rest_names = {r["name"] for r in rest_leaf}
+    merged = (mqtt_names == rest_names)
 
-    lines.append("**Description:**")
-    lines.append(description or "")
-    lines.append("")
+    # MQTT endpoint HTML block — single <div> passes md() block check unchanged
+    mqtt_block = (
+        '<div class="endpoint-block">'
+        '<div class="ep-heading ep-mqtt">MQTT Endpoint Details</div>'
+        + html_endpoint_table([("Command", f"<code>{mqtt_cmd}</code>")])
+        + "</div>"
+    )
 
-    lines.append("**Usage:**")
-    lines.append(usage or "")
-    lines.append("")
-    lines.append("---")
-    lines.append("")
+    # REST endpoint HTML block
+    rest_rows = [
+        ("Method", method_badge_html(method)),
+        ("Path", f"<code>{path}</code>"),
+        ("OperationId", f"<code>{op_id}</code>"),
+        ("Content-Type", "<code>application/json</code>"),
+    ]
+    note_html = f'<p class="ep-note">{rest_note}</p>' if rest_note else ""
+    rest_block = (
+        '<div class="endpoint-block">'
+        '<div class="ep-heading ep-rest">REST Endpoint Details</div>'
+        + html_endpoint_table(rest_rows)
+        + note_html
+        + "</div>"
+    )
 
-    # Compare MQTT and REST parameters for merging
-    def param_rows_key(rows):
-        # Only compare name/type/required/description
-        return [ (r['name'], r['type'], r['required'], r['description']) for r in rows ]
-
-    merged = param_rows_key(mqtt_params) == param_rows_key(rest_params)
-
-    # Colored headings (HTML for docs UI)
-    mqtt_heading = '<div style="background:#e0f7fa;padding:6px 12px;font-weight:600;border-radius:4px;color:#006064;margin-bottom:4px;">MQTT Endpoint Details</div>'
-    rest_heading = '<div style="background:#e8eaf6;padding:6px 12px;font-weight:600;border-radius:4px;color:#1a237e;margin-bottom:4px;">REST Endpoint Details</div>'
-
-    # Colored method badge
-    method_badge = f'<span style="display:inline-block;background:#ffd54f;color:#795548;font-weight:700;padding:2px 10px;border-radius:12px;margin-right:8px;">{method}</span>'
+    # Assemble parts joined with double newlines so md() block-splits correctly
+    parts = []
+    parts.append(f"**Description:**\n{description}")
+    parts.append(f"**Usage:**\n{usage}")
 
     if merged:
-        lines.append(mqtt_heading)
-        lines.append("")
-        lines.append(f"| Field | Value |")
-        lines.append(f"|-------|-------|")
-        lines.append(f"| Command | `{mqtt_cmd}` |")
-        lines.append("")
-
-        lines.append(rest_heading)
-        lines.append("")
-        lines.append(f"| Field | Value |")
-        lines.append(f"|-------|-------|")
-        lines.append(f"| Method | {method_badge}`{method}` |")
-        lines.append(f"| Path | `{path}` |")
-        lines.append(f"| OperationId | `{op_id}` |")
-        lines.append(f"| Content-Type | `application/json` |")
-        lines.append("")
-        if rest_note:
-            lines.append(f"> {rest_note}")
-            lines.append("")
-
-        lines.append('**Parameters (MQTT & REST)**')
-        lines.append("")
-        lines.append('_The following parameters apply to both MQTT and REST unless otherwise noted._\n')
-        lines.append(params_table(mqtt_params))
+        parts.append("**Parameters (MQTT & REST):**")
+        parts.append(params_bullets(mqtt_leaf))
     else:
-        lines.append(mqtt_heading)
-        lines.append("")
-        lines.append(f"| Field | Value |")
-        lines.append(f"|-------|-------|")
-        lines.append(f"| Command | `{mqtt_cmd}` |")
-        lines.append("")
-        lines.append('**MQTT Parameters**')
-        lines.append("")
-        lines.append(params_table(mqtt_params))
+        if mqtt_leaf:
+            parts.append("**MQTT Parameters:**")
+            parts.append(params_bullets(mqtt_leaf))
+        if rest_leaf:
+            parts.append("**REST Parameters:**")
+            parts.append(params_bullets(rest_leaf))
 
-        lines.append(rest_heading)
-        lines.append("")
-        lines.append(f"| Field | Value |")
-        lines.append(f"|-------|-------|")
-        lines.append(f"| Method | {method_badge}`{method}` |")
-        lines.append(f"| Path | `{path}` |")
-        lines.append(f"| OperationId | `{op_id}` |")
-        lines.append(f"| Content-Type | `application/json` |")
-        lines.append("")
-        if rest_note:
-            lines.append(f"> {rest_note}")
-            lines.append("")
-        lines.append('**REST Parameters**')
-        lines.append("")
-        lines.append(params_table(rest_params))
+    parts.append(mqtt_block)
+    parts.append(rest_block)
 
-    return "\n".join(lines)
+    return "\n\n".join(parts)
 
 
 def main():
