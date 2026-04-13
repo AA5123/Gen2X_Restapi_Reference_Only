@@ -1,29 +1,62 @@
-﻿Use this guide to enable, configure, and manage Impinj Gen2X features on Zebra fixed RFID readers using MQTT. These features are currently supported on the FXR90, with additional fixed reader support coming soon.
+﻿Use this guide to enable, configure, and manage Impinj Gen2X features on Zebra fixed RFID readers using both MQTT and REST APIs. These features are currently supported on the FXR90, with additional fixed reader support coming soon.
 
 ## Overview
 
-This tutorial provides a walk-through of the steps to use Impinj Gen2X tag features via the MQTT API on Zebra fixed RFID readers, including:
+This reference explains how to use Gen2X operations across MQTT and REST for:
 
-- **Protected Mode** — Lock individual tags with a password so they are invisible to unauthorized readers. *(tag-scoped — applies to a specific tag by EPC)*
-- **FastID** — Return the EPC and TID in a single inventory response. *(reader-scoped — applies to all inventory operations)*
-- **TagFocus** — Silence already-read tags so the reader focuses on new ones. *(reader-scoped — applies to all inventory operations)*
-- **Tag Quieting** — Silence specific tags by EPC ID. *(tag-scoped — applies to specific tags by EPC)*
+- **Protected Mode**: Lock individual tags with a password so they are invisible to unauthorized readers. *(tag-scoped: applies to a specific tag by EPC)*
+- **FastID**: Return the EPC and TID in a single inventory response. *(reader-scoped: applies to inventory on the reader)*
+- **TagFocus**: Reduce repeated reports from already-read tags so the reader prioritizes new tags. *(reader-scoped: applies to inventory on the reader)*
+- **Tag Quieting**: Quiet specific tags by EPC ID. *(tag-scoped: applies to specific tags by EPC)*
 
+Impinj Gen2X extends Gen2 radio and logical layers. Tags must support Gen2X to use these features. For tag compatibility, refer to [Impinj Gen2X specifications](http://www.impinj.com/Gen2X).
 
-Impinj Gen2X extends the Gen2 radio and logical layers. Your tags must support Gen2X to use these features. To check whether your tags are compatible, see the [Impinj Gen2X tag specifications](http://www.impinj.com/Gen2X).
+## Protocols
 
-## Before you begin
+This documentation covers both interfaces for the same Gen2X feature set:
 
-Set up your MQTT connection, broker, and topic before using this API. For setup instructions, see the [Zebra IoTC MQTT Setup Guide](https://zebradevs.github.io/rfid-ziotc-docs/other_cloud_support/MQTT/index.html).
+- MQTT: Command-based operations for cloud-connected workflows.
+- REST: HTTP endpoints for direct API integration.
 
-## Get started
+Use either interface based on your deployment and integration architecture.
 
-Follow these steps to configure and apply Gen2X features on the reader:
+## Before You Begin
 
-1. **Check current state (optional)** — Send `get_impinjGen2X` to see which Gen2X features are currently active on the reader.
-2. **Stop the radio (if running)** — Send the `stop` command if the radio is currently active. The radio must be stopped before you can apply configuration changes.
-3. **Configure features** — Use the `set_impinjGen2X` command to stage the Gen2X features you want to enable (e.g., Protected Mode, FastID, TagFocus).
-4. **Review staged configuration** — Send `get_impinjGen2X` to verify the staged Gen2X configuration before starting the radio.
-5. **Start with Gen2X** — Send the `start` command with `applyImpinjGen2X` set to `true`. This applies the staged Gen2X configuration and starts the radio.
+- For MQTT: Configure broker, topic, and connection before sending Gen2X commands.
+- For REST: Confirm the API service is reachable at your reader/host URL and port.
 
-> **Feature persistence:** Reader-scoped settings (FastID, TagFocus) and tag-scoped settings (Protected Mode, Tag Quieting) are staged via `set_impinjGen2X` and applied when the radio starts with `applyImpinjGen2X: true`. Staged configurations persist across stop/start cycles as long as the MQTT session remains connected. A reader reboot or MQTT disconnect clears all staged configurations, and you must re-send `set_impinjGen2X` to restore them.
+## REST API Getting Started
+
+Use this sequence for a standard Gen2X update workflow.
+
+REST URL details:
+
+- Base URL format: `http://<device-ip>:<port>`
+- Full endpoint format: `http://<device-ip>:<port><path>`
+- Example endpoint: `http://<device-ip>:<port>/cloud/impinjGen2X`
+- Common paths used in this flow: `/cloud/localRestLogin`, `/cloud/impinjGen2X`, `/cloud/stop`, `/cloud/start`
+
+Authentication:
+
+1. Call `POST http://<device-ip>:<port>/cloud/localRestLogin` to obtain an access token.
+2. Include the token in every protected request header:
+
+   `Authorization: Bearer <token>`
+
+Workflow:
+
+1. Use `GET http://<device-ip>:<port>/cloud/impinjGen2X` to check the currently saved Gen2X configuration.
+2. Use `PUT http://<device-ip>:<port>/cloud/stop` to stop the IoT cloud service if it is running.
+3. Use `PUT http://<device-ip>:<port>/cloud/impinjGen2X` to stage one or more feature updates.
+4. Use `GET http://<device-ip>:<port>/cloud/impinjGen2X` to verify staged configuration before applying it.
+5. Use `PUT http://<device-ip>:<port>/cloud/start` with `applyImpinjGen2X: true` to start the service and apply staged configuration.
+
+## MQTT Getting Started
+
+Use this sequence for the same workflow through MQTT commands:
+
+1. Send `get_impinjGen2X` to check current Gen2X configuration.
+2. Send `stop` to stop the IoT cloud service if it is running.
+3. Send `set_impinjGen2X` to stage one or more feature updates.
+4. Send `get_impinjGen2X` to verify staged configuration.
+5. Send `start` with `applyImpinjGen2X: true` to start the service and apply staged configuration.
