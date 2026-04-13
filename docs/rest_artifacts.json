@@ -700,12 +700,13 @@
       "properties": {},
       "additionalProperties": false
     },
-    "response_example": "",
+    "response_example": 1,
     "response_schema": {
       "title": "Stop IOT Cloud Service Success Response",
-      "type": "string",
+      "description": "Returns 1 when stop request is accepted/successful.",
+      "type": "integer",
       "examples": [
-        ""
+        1
       ]
     }
   },

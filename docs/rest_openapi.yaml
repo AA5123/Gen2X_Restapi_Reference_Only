@@ -461,8 +461,9 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                example: ""
+                type: integer
+                description: Returns 1 when stop request is accepted/successful.
+                example: 1
         '500':
           description: Internal Server Error
           content:
