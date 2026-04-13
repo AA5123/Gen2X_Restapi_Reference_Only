@@ -232,42 +232,71 @@ def generate(op_name):
     lines.append("---")
     lines.append("")
 
-    # MQTT Endpoint Details
-    lines.append("**MQTT Endpoint Details**")
-    lines.append("")
-    lines.append("| Field | Value |")
-    lines.append("|-------|-------|")
-    lines.append("| Publish Topic | `controlrequest` |")
-    lines.append("| Subscribe Topic | `controlresponse` |")
-    lines.append(f"| Command | `{mqtt_cmd}` |")
-    lines.append("")
+    # Compare MQTT and REST parameters for merging
+    def param_rows_key(rows):
+        # Only compare name/type/required/description
+        return [ (r['name'], r['type'], r['required'], r['description']) for r in rows ]
 
-    # MQTT Parameters
-    lines.append("**MQTT Parameters**")
-    lines.append("")
-    lines.append(params_table(mqtt_params))
+    merged = param_rows_key(mqtt_params) == param_rows_key(rest_params)
 
-    lines.append("---")
-    lines.append("")
+    # Colored headings (HTML for docs UI)
+    mqtt_heading = '<div style="background:#e0f7fa;padding:6px 12px;font-weight:600;border-radius:4px;color:#006064;margin-bottom:4px;">MQTT Endpoint Details</div>'
+    rest_heading = '<div style="background:#e8eaf6;padding:6px 12px;font-weight:600;border-radius:4px;color:#1a237e;margin-bottom:4px;">REST Endpoint Details</div>'
 
-    # REST Endpoint Details
-    lines.append("**REST Endpoint Details**")
-    lines.append("")
-    lines.append("| Field | Value |")
-    lines.append("|-------|-------|")
-    lines.append(f"| Method | `{method}` |")
-    lines.append(f"| Path | `{path}` |")
-    lines.append(f"| OperationId | `{op_id}` |")
-    lines.append("| Content-Type | `application/json` |")
-    lines.append("")
-    if rest_note:
-        lines.append(f"> {rest_note}")
+    # Colored method badge
+    method_badge = f'<span style="display:inline-block;background:#ffd54f;color:#795548;font-weight:700;padding:2px 10px;border-radius:12px;margin-right:8px;">{method}</span>'
+
+    if merged:
+        lines.append(mqtt_heading)
+        lines.append("")
+        lines.append(f"| Field | Value |")
+        lines.append(f"|-------|-------|")
+        lines.append(f"| Command | `{mqtt_cmd}` |")
         lines.append("")
 
-    # REST Parameters
-    lines.append("**REST Parameters**")
-    lines.append("")
-    lines.append(params_table(rest_params))
+        lines.append(rest_heading)
+        lines.append("")
+        lines.append(f"| Field | Value |")
+        lines.append(f"|-------|-------|")
+        lines.append(f"| Method | {method_badge}`{method}` |")
+        lines.append(f"| Path | `{path}` |")
+        lines.append(f"| OperationId | `{op_id}` |")
+        lines.append(f"| Content-Type | `application/json` |")
+        lines.append("")
+        if rest_note:
+            lines.append(f"> {rest_note}")
+            lines.append("")
+
+        lines.append('**Parameters (MQTT & REST)**')
+        lines.append("")
+        lines.append('_The following parameters apply to both MQTT and REST unless otherwise noted._\n')
+        lines.append(params_table(mqtt_params))
+    else:
+        lines.append(mqtt_heading)
+        lines.append("")
+        lines.append(f"| Field | Value |")
+        lines.append(f"|-------|-------|")
+        lines.append(f"| Command | `{mqtt_cmd}` |")
+        lines.append("")
+        lines.append('**MQTT Parameters**')
+        lines.append("")
+        lines.append(params_table(mqtt_params))
+
+        lines.append(rest_heading)
+        lines.append("")
+        lines.append(f"| Field | Value |")
+        lines.append(f"|-------|-------|")
+        lines.append(f"| Method | {method_badge}`{method}` |")
+        lines.append(f"| Path | `{path}` |")
+        lines.append(f"| OperationId | `{op_id}` |")
+        lines.append(f"| Content-Type | `application/json` |")
+        lines.append("")
+        if rest_note:
+            lines.append(f"> {rest_note}")
+            lines.append("")
+        lines.append('**REST Parameters**')
+        lines.append("")
+        lines.append(params_table(rest_params))
 
     return "\n".join(lines)
 
