@@ -1,0 +1,102 @@
+{
+  "title": "Get Gen2X Configuration Success Response",
+  "description": "Returns the current Gen2X configuration. Only previously configured features are included.",
+  "type": "object",
+  "properties": {
+    "fastID": {
+      "type": "object",
+      "description": "FastID configuration, if previously configured.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether FastID is enabled."
+        },
+        "tidSelector": {
+          "type": "string",
+          "description": "TID word selector mask.",
+          "enum": [
+            "TID[0]",
+            "TID[1]",
+            "TID[2]",
+            "TID[3]"
+          ]
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "tagProtect": {
+      "type": "object",
+      "description": "TagProtect configuration, if previously configured.",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "enableTagProtection",
+            "disableTagProtection",
+            "enableTagVisibility",
+            "disableTagVisibility"
+          ]
+        },
+        "password": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 8,
+          "pattern": "^[0-9A-Fa-f]{8}$"
+        },
+        "tagID": {
+          "type": "string",
+          "pattern": "^(?:[0-9A-Fa-f]{2})+$"
+        },
+        "enableShortRange": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "action",
+        "password"
+      ]
+    },
+    "tagFocus": {
+      "type": "object",
+      "description": "TagFocus configuration, if previously configured.",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "tagQuieting": {
+      "type": "object",
+      "description": "TagQuieting configuration, if previously configured.",
+      "properties": {
+        "basic": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "quiet",
+                "unquiet"
+              ]
+            },
+            "tagIDs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "action",
+            "tagIDs"
+          ]
+        }
+      }
+    }
+  }
+}

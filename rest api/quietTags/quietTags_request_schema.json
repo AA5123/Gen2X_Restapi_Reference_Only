@@ -1,0 +1,46 @@
+{
+  "title": "Quiet Tags Request",
+  "description": "Request payload for quieting specific tags.",
+  "type": "object",
+  "required": [
+    "tagQuieting"
+  ],
+  "properties": {
+    "tagQuieting": {
+      "type": "object",
+      "description": "Tag quieting configuration.",
+      "required": [
+        "basic"
+      ],
+      "properties": {
+        "basic": {
+          "type": "object",
+          "description": "Basic tag quieting settings.",
+          "required": [
+            "action",
+            "tagIDs"
+          ],
+          "properties": {
+            "action": {
+              "type": "string",
+              "const": "quiet",
+              "description": "Silence the specified tags."
+            },
+            "tagIDs": {
+              "type": "array",
+              "description": "List of hexadecimal EPC strings of tags to quiet.",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "pattern": "^(?:[0-9A-Fa-f]{2})+$"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

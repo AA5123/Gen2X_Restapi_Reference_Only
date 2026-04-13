@@ -334,80 +334,69 @@
       return lines.join('\n');
     }
 
+    /* ── REST artifact folder map (operation summary → folder name) ── */
+    var REST_ARTIFACTS = {
+      'Enable Impinj Protected Mode':           'enableTagProtection',
+      'Disable Impinj Protected Mode':          'disableTagProtection',
+      'Enable Inventory of Protected Tags':     'enableTagVisibility',
+      'Clear Protected Mode Configuration':     'disableTagVisibility',
+      'Enable Protected Mode with Short Range': 'enableShortRange',
+      'Enable FastID':                          'enableFastid',
+      'Disable FastID':                         'disableFastid',
+      'Enable TagFocus':                        'enableTagfocus',
+      'Disable TagFocus':                       'disableTagfocus',
+      'Quiet Tags':                             'quietTags',
+      'Unquiet Tags':                           'unquietTags',
+      'Get Gen2X Config':                       'getGen2xConfig',
+      'Start':                                  'start',
+      'Stop':                                   'stop'
+    };
+
+    /* Fetch a JSON file from the rest api artifacts folder, return parsed JSON or null */
+    function fetchRestArtifact(folder, suffix) {
+      var url = '../rest%20api/' + encodeURIComponent(folder) + '/' + folder + '_' + suffix + '.json?v=' + Date.now();
+      return fetch(url)
+        .then(function (r) { return r.ok ? r.text() : null; })
+        .then(function (text) { return text !== null ? text : null; })
+        .catch(function () { return null; });
+    }
+
+    /* After initial render, load REST artifacts and inject into placeholder panels */
+    function loadRestArtifacts(id, folder) {
+      Promise.all([
+        fetchRestArtifact(folder, 'request_example'),
+        fetchRestArtifact(folder, 'request_schema'),
+        fetchRestArtifact(folder, 'response_example'),
+        fetchRestArtifact(folder, 'response_schema')
+      ]).then(function (results) {
+        var files = [
+          { panelId: 'req-rest-ex-' + id, text: results[0] },
+          { panelId: 'req-rest-sc-' + id, text: results[1] },
+          { panelId: 'res-rest-ex-' + id, text: results[2] },
+          { panelId: 'res-rest-sc-' + id, text: results[3] }
+        ];
+        files.forEach(function (f) {
+          var panel = document.getElementById(f.panelId);
+          if (!panel) return;
+          if (f.text !== null) {
+            var pretty = f.text;
+            try { pretty = JSON.stringify(JSON.parse(f.text), null, 2); } catch(e) {}
+            panel.innerHTML = '<pre class="language-json"><code class="language-json">' + escHtml(pretty) + '</code></pre>';
+          } else {
+            panel.innerHTML = '<p class="rest-empty">No REST artifact found.</p>';
+          }
+        });
+        addCollapseToggles();
+        addCopyButtons();
+        if (window.Prism) Prism.highlightAllUnder(document.getElementById('content'));
+      });
+    }
+
     function renderOperation(path, method, op) {
       var summary = op.summary || path;
       var id = slugify(summary);
       var desc = op.description || '';
-      var isEnableTagProtectionOp = summary === 'Enable Impinj Protected Mode' || path === '/enable_tag_protection';
-
-      /* REST-only artifacts for Enable Impinj Protected Mode */
-      var restReqExampleJson = '';
-      var restReqSchemaJson = '';
-      var restResExampleJson = '';
-      var restResSchemaJson = '';
-      if (isEnableTagProtectionOp) {
-        restReqExampleJson = JSON.stringify({
-          tagProtect: {
-            action: 'enableTagProtection',
-            password: '77777777',
-            tagID: 'e2801191a5030069073b426d',
-            enableShortRange: true
-          }
-        }, null, 2);
-
-        restReqSchemaJson = JSON.stringify({
-          $schema: 'https://json-schema.org/draft/2020-12/schema',
-          title: 'Enable Impinj Protected Mode Request',
-          description: 'REST request schema for PUT /cloud/impinjGen2X (setImpinjGen2X)',
-          'x-method': 'PUT',
-          'x-path': '/cloud/impinjGen2X',
-          'x-operationId': 'setImpinjGen2X',
-          'x-contentType': 'application/json',
-          type: 'object',
-          required: ['tagProtect'],
-          properties: {
-            tagProtect: {
-              type: 'object',
-              required: ['action', 'password', 'tagID'],
-              properties: {
-                action: {
-                  type: 'string',
-                  const: 'enableTagProtection',
-                  description: 'Sets a tag to protected mode.'
-                },
-                password: {
-                  type: 'string',
-                  description: '8-character hexadecimal 32-bit password used for tag protection.',
-                  minLength: 8,
-                  maxLength: 8,
-                  pattern: '^[0-9A-Fa-f]{8}$'
-                },
-                tagID: {
-                  type: 'string',
-                  description: 'Hexadecimal tagID (EPC) of the target tag.',
-                  pattern: '^[0-9A-Fa-f]+$'
-                },
-                enableShortRange: {
-                  type: 'boolean',
-                  description: 'Enables short-range protection mode for higher security.'
-                }
-              },
-              additionalProperties: false
-            }
-          },
-          additionalProperties: false
-        }, null, 2);
-
-        restResExampleJson = JSON.stringify('', null, 2);
-
-        restResSchemaJson = JSON.stringify({
-          $schema: 'https://json-schema.org/draft/2020-12/schema',
-          title: 'Enable Impinj Protected Mode Success Response',
-          description: 'From PUT /cloud/impinjGen2X 200 response in docs/rest_openapi.yaml',
-          type: 'string',
-          examples: ['']
-        }, null, 2);
-      }
+      var restFolder = REST_ARTIFACTS[summary] || null;
 
       /* Extract example JSONs for REST tabs */
       var reqExampleJson = '';
@@ -428,17 +417,17 @@
           var schemaHtml = ct.schema ? schemaTable(ct.schema) : '';
 
           reqHtml = '<div class="payload-section">';
-          reqHtml += '<div class="payload-heading">MQTT Command Payload</div>';
+          reqHtml += '<div class="payload-heading">Request Payload</div>';
           reqHtml += '<div class="tab-bar">';
           if (reqExampleJson) reqHtml += '<button class="tab-btn active" data-tab="req-ex-' + id + '">MQTT Example</button>';
           if (schemaHtml) reqHtml += '<button class="tab-btn" data-tab="req-sc-' + id + '">MQTT Schema</button>';
-          if (restReqExampleJson) reqHtml += '<button class="tab-btn" data-tab="req-rest-ex-' + id + '">REST Example</button>';
-          if (restReqSchemaJson) reqHtml += '<button class="tab-btn" data-tab="req-rest-sc-' + id + '">REST Schema</button>';
+          if (restFolder) reqHtml += '<button class="tab-btn" data-tab="req-rest-ex-' + id + '">REST Example</button>';
+          if (restFolder) reqHtml += '<button class="tab-btn" data-tab="req-rest-sc-' + id + '">REST Schema</button>';
           reqHtml += '</div>';
           if (reqExampleJson) reqHtml += '<div class="tab-panel active" id="req-ex-' + id + '"><pre class="language-json"><code class="language-json">' + escHtml(reqExampleJson) + '</code></pre></div>';
           if (schemaHtml) reqHtml += '<div class="tab-panel" id="req-sc-' + id + '">' + schemaHtml + '</div>';
-          if (restReqExampleJson) reqHtml += '<div class="tab-panel" id="req-rest-ex-' + id + '"><pre class="language-json"><code class="language-json">' + escHtml(restReqExampleJson) + '</code></pre></div>';
-          if (restReqSchemaJson) reqHtml += '<div class="tab-panel" id="req-rest-sc-' + id + '"><pre class="language-json"><code class="language-json">' + escHtml(restReqSchemaJson) + '</code></pre></div>';
+          if (restFolder) reqHtml += '<div class="tab-panel" id="req-rest-ex-' + id + '"><p class="rest-loading">Loading…</p></div>';
+          if (restFolder) reqHtml += '<div class="tab-panel" id="req-rest-sc-' + id + '"><p class="rest-loading">Loading…</p></div>';
           reqHtml += '</div>';
         }
       }
@@ -454,13 +443,14 @@
           var resExKeys = Object.keys(resExObj);
           var resSchemaHtml = rct.schema ? schemaTable(rct.schema) : '';
           resHtml = '<div class="payload-section">';
-          resHtml += '<div class="payload-heading">MQTT Response Payload</div>';
-          if (resExKeys.length || resSchemaHtml) {
+          resHtml += '<div class="payload-heading">Response Payload</div>';
+          var hasResContent = resExKeys.length || resSchemaHtml || restFolder;
+          if (hasResContent) {
             resHtml += '<div class="tab-bar">';
             if (resExKeys.length) resHtml += '<button class="tab-btn active" data-tab="res-ex-' + id + '">MQTT Example</button>';
             if (resSchemaHtml) resHtml += '<button class="tab-btn" data-tab="res-sc-' + id + '">MQTT Schema</button>';
-            if (restResExampleJson) resHtml += '<button class="tab-btn" data-tab="res-rest-ex-' + id + '">REST Example</button>';
-            if (restResSchemaJson) resHtml += '<button class="tab-btn" data-tab="res-rest-sc-' + id + '">REST Schema</button>';
+            if (restFolder) resHtml += '<button class="tab-btn" data-tab="res-rest-ex-' + id + '">REST Example</button>';
+            if (restFolder) resHtml += '<button class="tab-btn" data-tab="res-rest-sc-' + id + '">REST Schema</button>';
             resHtml += '</div>';
             if (resExKeys.length) {
               resHtml += '<div class="tab-panel active" id="res-ex-' + id + '">';
@@ -475,11 +465,16 @@
               resHtml += '</div>';
             }
             if (resSchemaHtml) resHtml += '<div class="tab-panel" id="res-sc-' + id + '">' + resSchemaHtml + '</div>';
-            if (restResExampleJson) resHtml += '<div class="tab-panel" id="res-rest-ex-' + id + '"><pre class="language-json"><code class="language-json">' + escHtml(restResExampleJson) + '</code></pre></div>';
-            if (restResSchemaJson) resHtml += '<div class="tab-panel" id="res-rest-sc-' + id + '"><pre class="language-json"><code class="language-json">' + escHtml(restResSchemaJson) + '</code></pre></div>';
+            if (restFolder) resHtml += '<div class="tab-panel" id="res-rest-ex-' + id + '"><p class="rest-loading">Loading…</p></div>';
+            if (restFolder) resHtml += '<div class="tab-panel" id="res-rest-sc-' + id + '"><p class="rest-loading">Loading…</p></div>';
           }
           resHtml += '</div>';
         }
+      }
+
+      /* Schedule async REST artifact loading */
+      if (restFolder) {
+        setTimeout(function () { loadRestArtifacts(id, restFolder); }, 0);
       }
 
       return '<div class="operation" id="op-' + id + '">' +

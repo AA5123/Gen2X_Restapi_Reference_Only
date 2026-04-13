@@ -1,0 +1,7 @@
+{
+  "title": "Disable FastID Success Response",
+  "type": "string",
+  "examples": [
+    ""
+  ]
+}
