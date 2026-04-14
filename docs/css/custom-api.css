@@ -805,13 +805,13 @@ blockquote p:last-child {
 }
 
 .ep-mqtt {
-  background: #e0f7fa;
-  color: #006064;
+  background: #0f766e;
+  color: #ffffff;
 }
 
 .ep-rest {
-  background: #e8eaf6;
-  color: #1a237e;
+  background: #1d4ed8;
+  color: #ffffff;
 }
 
 .endpoint-table {
@@ -861,63 +861,6 @@ blockquote p:last-child {
 .ep-method-post   { background: #bbdefb; color: #0d47a1; }
 .ep-method-delete { background: #ffcdd2; color: #b71c1c; }
 .ep-method-patch  { background: #e1bee7; color: #4a148c; }
-
-/* ── Endpoint section blocks (generated in op descriptions) ─────── */
-.endpoint-block {
-  margin: var(--sp-3) 0;
-}
-
-.ep-heading {
-  display: inline-block;
-  padding: 5px 14px;
-  font-weight: 700;
-  border-radius: var(--radius-sm);
-  font-size: var(--text-sm);
-  margin-bottom: var(--sp-2);
-  letter-spacing: 0.01em;
-}
-
-.ep-mqtt {
-  background: #e0f7fa;
-  color: #006064;
-}
-
-.ep-rest {
-  background: #e8eaf6;
-  color: #1a237e;
-}
-
-.endpoint-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0 0 var(--sp-3) 0;
-  border: 1px solid var(--color-border);
-  font-size: var(--text-sm);
-}
-
-.endpoint-table td {
-  padding: var(--sp-2) var(--sp-4);
-  border-bottom: 1px solid var(--color-border);
-  vertical-align: middle;
-}
-
-.endpoint-table td:first-child {
-  font-weight: 600;
-  color: var(--color-text);
-  width: 140px;
-  white-space: nowrap;
-}
-
-.ep-note {
-  font-size: var(--text-sm);
-  color: var(--color-text-secondary);
-  border-left: 3px solid var(--color-warning);
-  background: var(--color-warning-bg);
-  padding: var(--sp-2) var(--sp-3);
-  border-radius: var(--radius-sm);
-  margin-top: var(--sp-1);
-  margin-bottom: 0;
-}
 
 /* HTTP method badges */
 .ep-method {

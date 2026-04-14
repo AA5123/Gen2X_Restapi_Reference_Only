@@ -26,6 +26,7 @@ ROOT = os.path.dirname(SCRIPT_DIR)
 OP_DESC_DIR = os.path.join(ROOT, "schemas", "operation_descriptions")
 CMD_DIR = os.path.join(ROOT, "schemas", "commands", "gen2x")
 REST_API_DIR = os.path.join(ROOT, "rest api")
+BASE_URL_TEMPLATE = "http://<host>:<port>"
 
 # ── Operation → REST folder mapping ──────────────────────────────────────────
 OP_TO_REST = {
@@ -47,20 +48,20 @@ OP_TO_REST = {
 
 # ── REST endpoint routing ─────────────────────────────────────────────────────
 REST_ENDPOINT = {
-    "enable_tag_protection":  ("PUT", "/cloud/impinjGen2X", "setImpinjGen2X"),
-    "disable_tag_protection": ("PUT", "/cloud/impinjGen2X", "setImpinjGen2X"),
-    "enable_tag_visibility":  ("PUT", "/cloud/impinjGen2X", "setImpinjGen2X"),
-    "disable_tag_visibility": ("PUT", "/cloud/impinjGen2X", "setImpinjGen2X"),
-    "enable_short_range":     ("PUT", "/cloud/impinjGen2X", "setImpinjGen2X"),
-    "enable_fastid":          ("PUT", "/cloud/impinjGen2X", "setImpinjGen2X"),
-    "disable_fastid":         ("PUT", "/cloud/impinjGen2X", "setImpinjGen2X"),
-    "enable_tagfocus":        ("PUT", "/cloud/impinjGen2X", "setImpinjGen2X"),
-    "disable_tagfocus":       ("PUT", "/cloud/impinjGen2X", "setImpinjGen2X"),
-    "quiet_tags":             ("PUT", "/cloud/impinjGen2X", "setImpinjGen2X"),
-    "unquiet_tags":           ("PUT", "/cloud/impinjGen2X", "setImpinjGen2X"),
-    "get_gen2x_config":       ("GET", "/cloud/impinjGen2X", "getImpinjGen2X"),
-    "start":                  ("PUT", "/cloud/start",       "startIotCloudService"),
-    "stop":                   ("PUT", "/cloud/stop",        "stopIotCloudService"),
+    "enable_tag_protection":  ("PUT", "/cloud/impinjGen2X"),
+    "disable_tag_protection": ("PUT", "/cloud/impinjGen2X"),
+    "enable_tag_visibility":  ("PUT", "/cloud/impinjGen2X"),
+    "disable_tag_visibility": ("PUT", "/cloud/impinjGen2X"),
+    "enable_short_range":     ("PUT", "/cloud/impinjGen2X"),
+    "enable_fastid":          ("PUT", "/cloud/impinjGen2X"),
+    "disable_fastid":         ("PUT", "/cloud/impinjGen2X"),
+    "enable_tagfocus":        ("PUT", "/cloud/impinjGen2X"),
+    "disable_tagfocus":       ("PUT", "/cloud/impinjGen2X"),
+    "quiet_tags":             ("PUT", "/cloud/impinjGen2X"),
+    "unquiet_tags":           ("PUT", "/cloud/impinjGen2X"),
+    "get_gen2x_config":       ("GET", "/cloud/impinjGen2X"),
+    "start":                  ("PUT", "/cloud/start"),
+    "stop":                   ("PUT", "/cloud/stop"),
 }
 
 # ── REST staging notes (shown below endpoint table) ───────────────────────────
@@ -202,7 +203,7 @@ def generate(op_name):
     rest_leaf = leaf_params_for_bullets(rest_schema)
 
     # REST endpoint details
-    method, path, op_id = REST_ENDPOINT.get(op_name, ("PUT", "/cloud/impinjGen2X", "setImpinjGen2X"))
+    method, path = REST_ENDPOINT.get(op_name, ("PUT", "/cloud/impinjGen2X"))
     rest_note = REST_NOTES.get(op_name, "")
 
     # Merge params if MQTT and REST field names are identical
@@ -227,7 +228,7 @@ def generate(op_name):
     rest_rows = [
         ("Method", method_badge_html(method)),
         ("Path", f"<code>{path}</code>"),
-        ("OperationId", f"<code>{op_id}</code>"),
+        ("Request URL", f"<code>{BASE_URL_TEMPLATE}{path}</code>"),
         ("Content-Type", "<code>application/json</code>"),
     ]
     note_html = f'<p class="ep-note">{rest_note}</p>' if rest_note else ""
