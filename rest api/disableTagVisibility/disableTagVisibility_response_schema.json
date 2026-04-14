@@ -1,7 +1,7 @@
 {
-  "title": "Clear Protected Mode Configuration Success Response",
-  "type": "string",
-  "examples": [
-    ""
-  ]
+    "title":  "Clear Protected Mode Configuration Success Response",
+    "type":  "string",
+    "examples":  [
+                     ""
+                 ]
 }

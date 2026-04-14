@@ -27,29 +27,50 @@ Use either interface based on your deployment and integration architecture.
 
 ## REST API Getting Started
 
-Use this sequence for a standard Gen2X update workflow.
+This section defines the standard REST workflow for staging and applying Gen2X configuration updates.
 
-REST URL details:
+### API URL Structure
 
-- Base URL format: `http://<device-ip>:<port>`
-- Full endpoint format: `http://<device-ip>:<port><path>`
-- Example endpoint: `http://<device-ip>:<port>/cloud/impinjGen2X`
-- Common paths used in this flow: `/cloud/localRestLogin`, `/cloud/impinjGen2X`, `/cloud/stop`, `/cloud/start`
+All REST requests use the following format:
 
-Authentication:
+`http://<host>:<port>/<path>`
 
-1. Call `POST http://<device-ip>:<port>/cloud/localRestLogin` to obtain an access token.
-2. Include the token in every protected request header:
+Example:
 
-   `Authorization: Bearer <token>`
+`http://<host>:<port>/cloud/impinjGen2X`
 
-Workflow:
+### Authentication
 
-1. Use `GET http://<device-ip>:<port>/cloud/impinjGen2X` to check the currently saved Gen2X configuration.
-2. Use `PUT http://<device-ip>:<port>/cloud/stop` to stop the IoT cloud service if it is running.
-3. Use `PUT http://<device-ip>:<port>/cloud/impinjGen2X` to stage one or more feature updates.
-4. Use `GET http://<device-ip>:<port>/cloud/impinjGen2X` to verify staged configuration before applying it.
-5. Use `PUT http://<device-ip>:<port>/cloud/start` with `applyImpinjGen2X: true` to start the service and apply staged configuration.
+Authenticate before calling protected endpoints.
+
+1. Send `POST /cloud/localRestLogin`.
+2. Extract the access token from the login response.
+3. Add the token to all protected requests:
+
+   `Authorization: Bearer <access_token>`
+
+### Gen2X Configuration Update Workflow
+
+Use this sequence to safely stage and apply Gen2X updates:
+
+1. **Check Current Configuration**
+   Send `GET /cloud/impinjGen2X` to retrieve the currently saved configuration.
+2. **Stop IoT Cloud Service**
+   Send `PUT /cloud/stop` to ensure the service is not running before configuration changes.
+3. **Stage Configuration Updates**
+   Send `PUT /cloud/impinjGen2X` to submit one or more Gen2X feature updates.
+4. **Verify Staged Configuration**
+   Send `GET /cloud/impinjGen2X` to confirm updates are staged correctly.
+5. **Apply Configuration and Restart Service**
+   Send `PUT /cloud/start` with payload:
+
+   ```json
+   {
+     "applyImpinjGen2X": true
+   }
+   ```
+
+   This starts the service and applies all staged Gen2X settings.
 
 ## MQTT Getting Started
 

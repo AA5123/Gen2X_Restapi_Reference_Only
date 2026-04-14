@@ -9,6 +9,16 @@ Send this command with an array of one or more EPC IDs to quiet. Quieted tags wi
 - **action** (string): Silence the specified tags Must be `quiet`.
 - **tagIDs** (array): List of tag EPCs (hex strings) to quiet
 
-<div class="endpoint-block"><div class="ep-heading ep-mqtt">MQTT Endpoint Details</div><table class="endpoint-table"><tbody><tr><td>Command</td><td><code>set_impinjGen2X</code></td></tr></tbody></table></div>
+### MQTT Endpoint Details
 
-<div class="endpoint-block"><div class="ep-heading ep-rest">REST Endpoint Details</div><table class="endpoint-table"><tbody><tr><td>Method</td><td><span class="ep-method ep-method-put">PUT</span></td></tr><tr><td>Path</td><td><code>/cloud/impinjGen2X</code></td></tr><tr><td>OperationId</td><td><code>setImpinjGen2X</code></td></tr><tr><td>Content-Type</td><td><code>application/json</code></td></tr></tbody></table></div>
+| Field | Value |
+| --- | --- |
+| Command | `set_impinjGen2X` |
+
+### REST Endpoint Details
+
+| Field | Value |
+| --- | --- |
+| Method | `PUT` |
+| Path | `/cloud/impinjGen2X` |
+| Content-Type | `application/json` |
