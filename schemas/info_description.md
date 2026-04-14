@@ -27,50 +27,25 @@ Use either interface based on your deployment and integration architecture.
 
 ## REST API Getting Started
 
-This section defines the standard REST workflow for staging and applying Gen2X configuration updates.
-
-### API URL Structure
-
-All REST requests use the following format:
-
-`http://<host>:<port>/<path>`
-
-Example:
-
-`http://<host>:<port>/cloud/impinjGen2X`
-
 ### Authentication
 
-Authenticate before calling protected endpoints.
-
-1. Send `POST /cloud/localRestLogin`.
+1. Send `PUT /cloud/localRestLogin`.
 2. Extract the access token from the login response.
 3. Add the token to all protected requests:
 
-   `Authorization: Bearer <access_token>`
+```
+Authorization: Bearer <access_token>
+```
 
-### Gen2X Configuration Update Workflow
+### REST Gen2X Configuration Workflow
 
 Use this sequence to safely stage and apply Gen2X updates:
 
-1. **Check Current Configuration**
-   Send `GET /cloud/impinjGen2X` to retrieve the currently saved configuration.
-2. **Stop IoT Cloud Service**
-   Send `PUT /cloud/stop` to ensure the service is not running before configuration changes.
-3. **Stage Configuration Updates**
-   Send `PUT /cloud/impinjGen2X` to submit one or more Gen2X feature updates.
-4. **Verify Staged Configuration**
-   Send `GET /cloud/impinjGen2X` to confirm updates are staged correctly.
-5. **Apply Configuration and Restart Service**
-   Send `PUT /cloud/start` with payload:
-
-   ```json
-   {
-     "applyImpinjGen2X": true
-   }
-   ```
-
-   This starts the service and applies all staged Gen2X settings.
+1. Send `GET /cloud/impinjGen2X` to check current Gen2X configuration.
+2. Send `PUT /cloud/stop` to stop the IoT cloud service if it is running.
+3. Send `PUT /cloud/impinjGen2X` to stage one or more feature updates.
+4. Send `GET /cloud/impinjGen2X` to verify staged configuration.
+5. Send `PUT /cloud/start` with `applyImpinjGen2X: true` to start the service and apply staged configuration.
 
 ## MQTT Getting Started
 
@@ -81,3 +56,22 @@ Use this sequence for the same workflow through MQTT commands:
 3. Send `set_impinjGen2X` to stage one or more feature updates.
 4. Send `get_impinjGen2X` to verify staged configuration.
 5. Send `start` with `applyImpinjGen2X: true` to start the service and apply staged configuration.
+
+## Feature Behavior and Configuration Persistence
+
+Understanding how Gen2X features behave across reader events is essential before deploying any configuration.
+
+### How Long Features Stay Active
+
+Once a Gen2X feature is enabled and the reader is started with `applyImpinjGen2X: true`, the feature remains active until one of the following occurs:
+
+- You send a command to explicitly disable the feature, **or**
+- You send a new `set_impinjGen2X` command with a different feature configuration
+
+> **Important:** The reader stores only one active Gen2X configuration at a time. Each new `set_impinjGen2X` command replaces the previous configuration entirely. Features do not stack or merge.
+
+**Example:**
+
+1. You configure Tag Quieting and start the reader → Tag Quieting is active
+2. You stop the reader and send a TagFocus configuration
+3. You start the reader again → **Only TagFocus is active. The Tag Quieting configuration is no longer present.**
