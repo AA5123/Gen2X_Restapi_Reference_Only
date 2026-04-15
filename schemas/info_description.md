@@ -4,10 +4,10 @@
 
 This reference explains how to use Gen2X operations across MQTT and REST for:
 
-- **Protected Mode**: Lock individual tags with a password so they are invisible to unauthorized readers. *(tag-scoped: applies to a specific tag by EPC)*
-- **FastID**: Return the EPC and TID in a single inventory response. *(reader-scoped: applies to inventory on the reader)*
-- **TagFocus**: Reduce repeated reports from already-read tags so the reader prioritizes new tags. *(reader-scoped: applies to inventory on the reader)*
-- **Tag Quieting**: Quiet specific tags by EPC ID. *(tag-scoped: applies to specific tags by EPC)*
+- **Protected Mode**: Lock individual tags with a password so they are invisible to unauthorized readers. 
+- **FastID**: Return the EPC and TID in a single inventory response. 
+- **TagFocus**: Reduce repeated reports from already-read tags so the reader prioritizes new tags. 
+- **Tag Quieting**: Quiet specific tags by EPC ID.
 
 Impinj Gen2X extends Gen2 radio and logical layers. Tags must support Gen2X to use these features. For tag compatibility, refer to [Impinj Gen2X specifications](http://www.impinj.com/Gen2X).
 
