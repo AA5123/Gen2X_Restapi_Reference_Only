@@ -24,7 +24,7 @@ Use either interface based on your deployment and integration architecture.
 - Set up your MQTT connection, broker, and topic before using this API. For setup instructions, see the [Zebra IoTC MQTT Setup Guide](https://zebradevs.github.io/rfid-ziotc-docs/other_cloud_support/MQTT/index.html).
 - For REST API integration and setup instructions, see the following guide: [Zebra IoTC HTTP POST Integration Guide](https://zebradevs.github.io/rfid-ziotc-docs/other_cloud_support/HTTP_POST/index.html)
 
-## REST API Getting Started
+## Getting Started with REST API
 
 ### Authentication
 
@@ -42,7 +42,7 @@ Use this sequence to safely stage and apply Gen2X updates:
 4. Send `GET /cloud/impinjGen2X` to verify staged configuration.
 5. Send `PUT /cloud/start` with `applyImpinjGen2X: true` to start the service and apply staged configuration.
 
-## MQTT Getting Started
+## Getting Started with MQTT
 
 Use this sequence for the same workflow through MQTT commands:
 
