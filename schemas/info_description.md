@@ -71,3 +71,9 @@ Once a Gen2X feature is enabled and the reader is started with `applyImpinjGen2X
 1. You configure Tag Quieting and start the reader → Tag Quieting is active
 2. You stop the reader and send a TagFocus configuration
 3. You start the reader again → **Only TagFocus is active. The Tag Quieting configuration is no longer present.**
+
+## Feature Persistence and State Changes
+
+- **Persistence:** When you stop and start the reader, disconnect and reconnect MQTT, or even reboot the device, the reader remembers the last Gen2X feature you configured. That feature will be automatically restored and active when the reader starts up again.
+
+- **Feature Replacement:** Only one Gen2X feature (such as TagFocus, Tag Quieting, etc.) can be active at a time. If you enable a new feature (for example, TagFocus) after previously enabling another (like Tag Quieting), the new feature will replace the previous one. The old feature is no longer active after the change.
