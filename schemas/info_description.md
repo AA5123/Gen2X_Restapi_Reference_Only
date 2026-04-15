@@ -53,25 +53,6 @@ Use this sequence for the same workflow through MQTT commands:
 4. Send `get_impinjGen2X` to verify staged configuration.
 5. Send `start` with `applyImpinjGen2X: true` to start the service and apply staged configuration.
 
-## Feature Behavior and Configuration Persistence
-
-Understanding how Gen2X features behave across reader events is essential before deploying any configuration.
-
-### How Long Features Stay Active
-
-Once a Gen2X feature is enabled and the reader is started with `applyImpinjGen2X: true`, the feature remains active until one of the following occurs:
-
-- You send a command to explicitly disable the feature, **or**
-- You send a new `set_impinjGen2X` command with a different feature configuration
-
-> **Important:** The reader stores only one active Gen2X configuration at a time. Each new `set_impinjGen2X` command replaces the previous configuration entirely. Features do not stack or merge.
-
-**Example:**
-
-1. You configure Tag Quieting and start the reader → Tag Quieting is active
-2. You stop the reader and send a TagFocus configuration
-3. You start the reader again → **Only TagFocus is active. The Tag Quieting configuration is no longer present.**
-
 ## Feature Persistence and State Changes
 
 - **Persistence:** When you stop and start the reader, disconnect and reconnect MQTT, or even reboot the device, the reader remembers the last Gen2X feature you configured. That feature will be automatically restored and active when the reader starts up again.
