@@ -1,4 +1,4 @@
-﻿Use this guide to enable, configure, and manage Impinj Gen2X features on Zebra fixed RFID readers using both MQTT and REST APIs. These features are currently supported on the FXR90, with additional fixed reader support coming soon.
+﻿Use this guide to enable, configure, and manage Impinj Gen2X features on Zebra fixed RFID readers using both MQTT and REST APIs. These features are currently supported on the FXR90 with Firmware 4.0.8, with additional fixed reader support coming soon.
 
 ## Overview
 
