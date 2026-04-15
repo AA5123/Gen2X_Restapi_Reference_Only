@@ -22,8 +22,9 @@ Use either interface based on your deployment and integration architecture.
 
 ## Before You Begin
 
-- For MQTT: Configure broker, topic, and connection before sending Gen2X commands.
-- For REST: Confirm the API service is reachable at your reader/host URL and port.
+
+- Set up your MQTT connection, broker, and topic before using this API. For setup instructions, see the [Zebra IoTC MQTT Setup Guide](https://zebradevs.github.io/rfid-ziotc-docs/other_cloud_support/MQTT/index.html).
+- For REST API integration and setup instructions, see the following guide: [Zebra IoTC HTTP POST Integration Guide](https://zebradevs.github.io/rfid-ziotc-docs/other_cloud_support/HTTP_POST/index.html)
 
 ## REST API Getting Started
 
