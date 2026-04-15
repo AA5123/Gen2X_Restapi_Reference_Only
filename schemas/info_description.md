@@ -53,6 +53,15 @@ Use this sequence for the same workflow through MQTT commands:
 4. Send `get_impinjGen2X` to verify staged configuration.
 5. Send `start` with `applyImpinjGen2X: true` to start the service and apply staged configuration.
 
+## MQTT Setup
+
+Set up your MQTT connection, broker, and topic before using this API. For setup instructions, see the Zebra IoTC MQTT Setup Guide.
+
+## REST API Setup
+
+For REST API integration and setup instructions, see the following guide:
+[Zebra IoTC HTTP POST Integration Guide](https://zebradevs.github.io/rfid-ziotc-docs/other_cloud_support/HTTP_POST/index.html)
+
 ## Feature Persistence and State Changes
 
 **Feature Persistence:**
