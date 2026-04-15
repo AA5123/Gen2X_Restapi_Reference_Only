@@ -21,8 +21,6 @@ This documentation covers both interfaces for the same Gen2X feature set:
 Use either interface based on your deployment and integration architecture.
 
 ## Before You Begin
-
-
 - Set up your MQTT connection, broker, and topic before using this API. For setup instructions, see the [Zebra IoTC MQTT Setup Guide](https://zebradevs.github.io/rfid-ziotc-docs/other_cloud_support/MQTT/index.html).
 - For REST API integration and setup instructions, see the following guide: [Zebra IoTC HTTP POST Integration Guide](https://zebradevs.github.io/rfid-ziotc-docs/other_cloud_support/HTTP_POST/index.html)
 
@@ -53,15 +51,6 @@ Use this sequence for the same workflow through MQTT commands:
 3. Send `set_impinjGen2X` to stage one or more feature updates.
 4. Send `get_impinjGen2X` to verify staged configuration.
 5. Send `start` with `applyImpinjGen2X: true` to start the service and apply staged configuration.
-
-## MQTT Setup
-
-Set up your MQTT connection, broker, and topic before using this API. For setup instructions, see the Zebra IoTC MQTT Setup Guide.
-
-## REST API Setup
-
-For REST API integration and setup instructions, see the following guide:
-[Zebra IoTC HTTP POST Integration Guide](https://zebradevs.github.io/rfid-ziotc-docs/other_cloud_support/HTTP_POST/index.html)
 
 ## Feature Persistence and State Changes
 
