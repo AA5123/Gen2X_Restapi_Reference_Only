@@ -31,13 +31,9 @@ Use either interface based on your deployment and integration architecture.
 
 1. Send `PUT /cloud/localRestLogin`.
 2. Extract the access token from the login response.
-3. Add the token to all protected requests:
+3. Add the token to all protected requests.
 
-```
-Authorization: Bearer <access_token>
-```
-
-### REST Gen2X Configuration Workflow
+### Configuration Workflow
 
 Use this sequence to safely stage and apply Gen2X updates:
 

@@ -26,7 +26,7 @@ ROOT = os.path.dirname(SCRIPT_DIR)
 OP_DESC_DIR = os.path.join(ROOT, "schemas", "operation_descriptions")
 CMD_DIR = os.path.join(ROOT, "schemas", "commands", "gen2x")
 REST_API_DIR = os.path.join(ROOT, "rest api")
-BASE_URL_TEMPLATE = "http://<host>:<port>"
+BASE_URL_TEMPLATE = "https://<device-ip>"
 
 # ── Operation → REST folder mapping ──────────────────────────────────────────
 OP_TO_REST = {

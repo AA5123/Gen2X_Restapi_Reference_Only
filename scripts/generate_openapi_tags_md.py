@@ -197,6 +197,22 @@ def replace_const_with_enum(obj):
     else:
         return obj
 
+
+def normalize_schema_examples(obj):
+    """Recursively convert JSON Schema 'examples' arrays into OpenAPI 'example'."""
+    if isinstance(obj, dict):
+        normalized = OrderedDict()
+        for key, value in obj.items():
+            if key == "examples" and isinstance(value, list):
+                if value:
+                    normalized["example"] = normalize_schema_examples(value[0])
+                continue
+            normalized[key] = normalize_schema_examples(value)
+        return normalized
+    if isinstance(obj, list):
+        return [normalize_schema_examples(i) for i in obj]
+    return obj
+
 def extract_schema(raw_schema):
     skip_keys = {"title", "x-stoplight", "x-tag", "examples", "description"}
     schema = OrderedDict()
@@ -206,6 +222,7 @@ def extract_schema(raw_schema):
     if "type" not in schema:
         schema["type"] = "object"
     schema = replace_const_with_enum(schema)
+    schema = normalize_schema_examples(schema)
     return schema
 
 
