@@ -1,113 +1,15 @@
 {
-    "title":  "Get Gen2X Configuration Success Response",
-    "description":  "Returns the current Gen2X configuration. Only previously configured features are included.",
-    "type":  "object",
-    "properties":  {
-                       "fastID":  {
-                                      "type":  "object",
-                                      "properties":  {
-                                                         "enabled":  {
-                                                                         "type":  "boolean"
-                                                                     },
-                                                         "tidSelector":  {
-                                                                             "type":  "string"
-                                                                         }
-                                                     },
-                                      "required":  [
-                                                       "enabled",
-                                                       "tidSelector"
-                                                   ]
-                                  },
-                       "tagProtect":  {
-                                          "type":  "object",
-                                          "properties":  {
-                                                             "action":  {
-                                                                            "type":  "string"
-                                                                        },
-                                                             "password":  {
-                                                                              "type":  "string"
-                                                                          },
-                                                             "tagID":  {
-                                                                           "type":  "string"
-                                                                       },
-                                                             "enableShortRange":  {
-                                                                                      "type":  "boolean"
-                                                                                  }
-                                                         },
-                                          "required":  [
-                                                           "action",
-                                                           "password",
-                                                           "tagID",
-                                                           "enableShortRange"
-                                                       ]
-                                      },
-                       "tagFocus":  {
-                                        "type":  "object",
-                                        "properties":  {
-                                                           "enabled":  {
-                                                                           "type":  "boolean"
-                                                                       }
-                                                       },
-                                        "required":  [
-                                                         "enabled"
-                                                     ]
-                                    },
-                       "tagQuieting":  {
-                                           "type":  "object",
-                                           "properties":  {
-                                                              "basic":  {
-                                                                            "type":  "object",
-                                                                            "properties":  {
-                                                                                               "action":  {
-                                                                                                              "type":  "string"
-                                                                                                          },
-                                                                                               "tagIDs":  {
-                                                                                                              "type":  "array",
-                                                                                                              "items":  {
-                                                                                                                            "type":  "string"
-                                                                                                                        }
-                                                                                                          }
-                                                                                           },
-                                                                            "required":  [
-                                                                                             "action",
-                                                                                             "tagIDs"
-                                                                                         ]
-                                                                        }
-                                                          },
-                                           "required":  [
-                                                            "basic"
-                                                        ]
-                                       }
-                   },
-    "required":  [
-                     "fastID",
-                     "tagProtect",
-                     "tagFocus",
-                     "tagQuieting"
-                 ],
-    "examples":  [
-                     {
-                         "fastID":  {
-                                        "enabled":  true,
-                                        "tidSelector":  "TID[0]"
-                                    },
-                         "tagProtect":  {
-                                            "action":  "enableTagProtection",
-                                            "password":  "77777777",
-                                            "tagID":  "e2801191a5030069073b426d",
-                                            "enableShortRange":  true
-                                        },
-                         "tagFocus":  {
-                                          "enabled":  true
-                                      },
-                         "tagQuieting":  {
-                                             "basic":  {
-                                                           "action":  "quiet",
-                                                           "tagIDs":  [
-                                                                          "e2801191a5030069073b426d"
-                                                                      ]
-                                                       }
-                                         }
-                     }
-                 ]
+    "title": "Get Gen2X Configuration Success Response",
+    "description": "Returns the current Gen2X configuration. Only the latest configured feature is included.",
+    "type": "object",
+    "properties": {
+        "tagFocus": {
+            "type": "object",
+            "properties": {
+                "enabled": { "type": "boolean" }
+            },
+            "required": ["enabled"]
+        }
+    },
+    "required": ["tagFocus"]
 }

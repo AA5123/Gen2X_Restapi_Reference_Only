@@ -2,7 +2,7 @@
 Enable Impinj Protected Mode — Locks an RFID tag using a 32-bit access password, rendering it invisible to readers.
 
 **Usage:**
-Send this command with the target tag's EPC ID and a 32-bit access password. Once enabled, the tag enters Protected Mode and ceases to respond to standard inventory commands. The tag remains RF silent and inaccessible until a reader provides the correct password.
+Send this command with the target tag's EPC ID and a 32-bit access password. Once enabled, the tag enters Protected Mode and ceases to respond to standard inventory commands. Use the **disable tag protection** command to remove password protection and restore normal tag operation. This is useful for securing sensitive tags or preventing unauthorized reading in high-traffic environments.
 
 **Parameters (MQTT & REST):**
 

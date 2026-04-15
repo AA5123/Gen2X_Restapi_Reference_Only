@@ -1,23 +1,5 @@
 {
-  "fastID": {
-    "enabled": true,
-    "tidSelector": "TID[0]"
-  },
-  "tagProtect": {
-    "action": "enableTagProtection",
-    "password": "77777777",
-    "tagID": "e2801191a5030069073b426d",
-    "enableShortRange": true
-  },
-  "tagFocus": {
-    "enabled": true
-  },
-  "tagQuieting": {
-    "basic": {
-      "action": "quiet",
-      "tagIDs": [
-        "e2801191a5030069073b426d"
-      ]
+    "tagFocus": {
+        "enabled": true
     }
-  }
 }
