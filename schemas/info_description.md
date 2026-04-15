@@ -55,6 +55,10 @@ Use this sequence for the same workflow through MQTT commands:
 
 ## Feature Persistence and State Changes
 
-- **Persistence:** When you stop and start the reader, disconnect and reconnect MQTT, or even reboot the device, the reader remembers the last Gen2X feature you configured. That feature will be automatically restored and active when the reader starts up again.
+**Feature Persistence:**
+The reader retains the last configured Gen2X feature and automatically restores it upon startup. This behavior is maintained across the following scenarios:
+- Stopping and restarting the reader
+- Disconnecting and reconnecting MQTT
+- Rebooting the device
 
-- **Feature Replacement:** Only one Gen2X feature (such as TagFocus, Tag Quieting, etc.) can be active at a time. If you enable a new feature (for example, TagFocus) after previously enabling another (like Tag Quieting), the new feature will replace the previous one. The old feature is no longer active after the change.
+**Feature Replacement:** Only one Gen2X feature (such as TagFocus, Tag Quieting, etc.) can be active at a time. If you enable a new feature (for example, TagFocus) after previously enabling another (like Tag Quieting), the new feature will replace the previous one. The old feature is no longer active after the change.
