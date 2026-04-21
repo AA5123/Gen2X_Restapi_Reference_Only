@@ -32,34 +32,23 @@
       "additionalProperties": false
     },
     "response_example": {
-      "fastID": {
-        "enabled": false
-      }
+      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
     },
     "response_schema": {
       "title": "Disable FastID Success Response",
+      "description": "From PUT /cloud/impinjGen2X 200 response",
       "type": "object",
       "properties": {
-        "fastID": {
-          "type": "object",
-          "properties": {
-            "enabled": {
-              "type": "boolean"
-            }
-          },
-          "required": [
-            "enabled"
-          ]
+        "message": {
+          "type": "string"
         }
       },
       "required": [
-        "fastID"
+        "message"
       ],
       "examples": [
         {
-          "fastID": {
-            "enabled": false
-          }
+          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
         }
       ]
     }
