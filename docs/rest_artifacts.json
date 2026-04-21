@@ -694,9 +694,10 @@
     "response_example": "",
     "response_schema": {
       "title": "Start IOT Cloud Service Success Response",
-      "type": "string",
+      "description": "Returns 1 when start request is accepted/successful.",
+      "type": "integer",
       "examples": [
-        ""
+        1
       ]
     }
   },

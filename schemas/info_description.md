@@ -54,10 +54,8 @@ Use this sequence for the same workflow through MQTT commands:
 
 ## Feature Persistence and State Changes
 
-**Feature Persistence:**
-The reader retains the last configured Gen2X feature and automatically restores it upon startup. This behavior is maintained across the following scenarios:
-- Stopping and restarting the reader
-- Disconnecting and reconnecting MQTT
-- Rebooting the device
+**Protected Mode** works independently on individual tags. You can use it at the same time as any reader-wide feature.
 
-**Feature Replacement:** Only one Gen2X feature (such as TagFocus, Tag Quieting, etc.) can be active at a time. If you enable a new feature (for example, TagFocus) after previously enabling another (like Tag Quieting), the new feature will replace the previous one. The old feature is no longer active after the change.
+**Reader Features** (FastID, TagFocus, Tag Quieting) allow only one active at a time. Enabling a new one disables the previous one.
+
+**Persistence:** Gen2X settings are saved automatically. They restore after restarts, MQTT reconnection, or device reboot.
