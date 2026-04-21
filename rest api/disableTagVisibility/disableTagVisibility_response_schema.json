@@ -1,7 +1,16 @@
 {
-    "title":  "Clear Protected Mode Configuration Success Response",
-    "type":  "string",
-    "examples":  [
-                     ""
-                 ]
+    "title": "Clear Protected Mode Configuration Success Response",
+    "description": "From PUT /cloud/impinjGen2X 200 response",
+    "type": "object",
+    "properties": {
+        "message": {
+            "type": "string"
+        }
+    },
+    "required": ["message"],
+    "examples": [
+        {
+            "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+        }
+    ]
 }
