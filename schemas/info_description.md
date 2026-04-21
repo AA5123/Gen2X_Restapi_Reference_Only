@@ -62,9 +62,9 @@ Gen2X supports four features:
 
 ### Feature Scope
 
-- **Tag-Scoped** - Protected Mode targets individual tags by EPC. It is independent of reader-scoped features. You can protect or unprotect multiple tags at the same time, and these settings can coexist with any active reader-scoped feature.
+- **Tag-Scoped** - Protected Mode applies to specific tags identified by EPC. It operates independently of reader-scoped features, so you can protect or unprotect individual tags while any reader-scoped feature remains active.
 
-- **Reader-Scoped** - FastID, TagFocus, and Tag Quieting apply at the reader level. These features are mutually exclusive: only one reader-scoped feature can be active at a time. Enabling a different reader-scoped feature replaces the current one.
+- **Reader-Scoped** - FastID, TagFocus, and Tag Quieting apply at the reader level. These features are mutually exclusive, so only one reader-scoped feature can be active at a time. Enabling a different reader-scoped feature replaces the currently active one for subsequent inventory operations.
 
 ### Feature Persistence
 
