@@ -457,7 +457,13 @@ paths:
                   example: true
       responses:
         '200':
-          description: OK (no response body)
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                description: No response body on success.
+                example: ""
         '500':
           description: Internal Server Error
           content:
@@ -484,7 +490,13 @@ paths:
       operationId: stopIotCloudService
       responses:
         '200':
-          description: OK (no response body)
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                description: No response body on success.
+                example: ""
         '500':
           description: Internal Server Error
           content:
