@@ -441,6 +441,13 @@ blockquote p:last-child {
   display: block;
 }
 
+.no-response-body {
+  color: var(--color-muted, #888);
+  font-style: italic;
+  padding: var(--sp-3) 0;
+  margin: 0;
+}
+
 /* ── Payload sections ──────────────────────────────────────────── */
 .payload-section {
   margin: var(--sp-3) 0;
