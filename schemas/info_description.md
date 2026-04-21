@@ -1,13 +1,13 @@
-﻿Use this guide to enable, configure, and manage Impinj Gen2X features on Zebra fixed RFID readers using both MQTT and REST APIs. These features are currently supported on the FXR90, with additional fixed reader support coming soon.
+﻿Use this guide to enable, configure, and manage Impinj Gen2X features on Zebra fixed RFID readers using both MQTT and REST APIs. These features are currently supported on the FXR90 with Firmware 4.0.8 and above, with additional fixed reader support coming soon.
 
 ## Overview
 
 This reference explains how to use Gen2X operations across MQTT and REST for:
 
-- **Protected Mode**: Lock individual tags with a password so they are invisible to unauthorized readers. *(tag-scoped: applies to a specific tag by EPC)*
-- **FastID**: Return the EPC and TID in a single inventory response. *(reader-scoped: applies to inventory on the reader)*
-- **TagFocus**: Reduce repeated reports from already-read tags so the reader prioritizes new tags. *(reader-scoped: applies to inventory on the reader)*
-- **Tag Quieting**: Quiet specific tags by EPC ID. *(tag-scoped: applies to specific tags by EPC)*
+- **Protected Mode**: Lock individual tags with a password so they are invisible to unauthorized readers. 
+- **FastID**: Return the EPC and TID in a single inventory response. 
+- **TagFocus**: Reduce repeated reports from already-read tags so the reader prioritizes new tags. 
+- **Tag Quieting**: Quiet specific tags by EPC ID through reader-level configuration. 
 
 Impinj Gen2X extends Gen2 radio and logical layers. Tags must support Gen2X to use these features. For tag compatibility, refer to [Impinj Gen2X specifications](http://www.impinj.com/Gen2X).
 
@@ -56,7 +56,7 @@ Use this sequence for the same workflow through MQTT commands:
 
 ### Gen2X Features
 
-There are four Gen2X features in total:
+Gen2X supports four features:
 - **Protected Mode** (tag-scoped)
 - **TagFocus** (reader-scoped)
 - **FastID** (reader-scoped)
@@ -64,17 +64,10 @@ There are four Gen2X features in total:
 
 ### Feature Scope
 
-- **Tag-Scoped** — Protected Mode: targets individual tags by EPC
-- **Reader-Scoped** — FastID, TagFocus, Tag Quieting: applies to the entire reader
+- **Tag-Scoped** - Protected Mode targets individual tags by EPC. It is independent of reader-scoped features. You can protect or unprotect multiple tags at the same time, and these settings can coexist with any active reader-scoped feature.
 
-### Tag-Scoped Feature Behavior
-
-Protected Mode can run alongside any reader-scoped feature. Multiple tags can be independently protected or unprotected at the same time — there is no conflict.
-
-### Reader-Scoped Feature Replacement
-
-Reader-scoped features are mutually exclusive. Only one can be active at a time. Enabling a new reader-scoped feature automatically replaces the current one.
+- **Reader-Scoped** - FastID, TagFocus, and Tag Quieting apply at the reader level. These features are mutually exclusive: only one reader-scoped feature can be active at a time. Enabling a different reader-scoped feature replaces the current one.
 
 ### Feature Persistence
 
-All configurations persist across reader restarts, reboots, and MQTT reconnections. No reconfiguration is needed after a restart.
+Saved Gen2X settings are automatically restored after reader restarts, reboots, and MQTT reconnections. Reconfiguration is not required after recovery.
