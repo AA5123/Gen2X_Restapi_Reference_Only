@@ -66,7 +66,7 @@ This request stages TagProtect settings. Use `PUT /cloud/start` with `applyImpin
 				"tagID": {
 					"type": "string",
 					"description": "Hexadecimal tagID (EPC) of the target tag.",
-					"pattern": "^[0-9A-Fa-f]+$"
+					"pattern": "^([0-9A-Fa-f]{24})+$"
 				},
 				"enableShortRange": {
 					"type": "boolean",

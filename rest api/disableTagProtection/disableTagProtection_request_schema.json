@@ -18,6 +18,7 @@
         "action": {
           "type": "string",
           "const": "disableTagProtection",
+          "enum": ["disableTagProtection"],
           "description": "Disables Protected Mode on the specified tag."
         },
         "password": {
@@ -30,7 +31,7 @@
         "tagID": {
           "type": "string",
           "description": "Hexadecimal tagID (EPC) of the target tag.",
-          "pattern": "^[0-9A-Fa-f]+$"
+          "pattern": "^([0-9A-Fa-f]{24})+$"
         }
       },
       "additionalProperties": false

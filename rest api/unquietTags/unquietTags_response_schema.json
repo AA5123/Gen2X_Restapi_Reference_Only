@@ -10,7 +10,7 @@
     "required": ["message"],
     "examples": [
         {
-            "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+            "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
         }
     ]
 }

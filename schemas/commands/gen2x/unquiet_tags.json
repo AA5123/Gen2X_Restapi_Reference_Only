@@ -48,7 +48,7 @@
                                     "minItems": 1,
                                     "items": {
                                         "type": "string",
-                                        "pattern": "^[0-9A-Fa-f]+$"
+                                        "pattern": "^([0-9A-Fa-f]{24})+$"
                                     },
                                     "description": "List of tag EPCs (hex strings) to unquiet"
                                 }

@@ -16,7 +16,7 @@ Impinj Gen2X extends Gen2 radio and logical layers. Tags must support Gen2X to u
 This documentation covers both interfaces for the same Gen2X feature set:
 
 - MQTT: Command-based operations for cloud-connected workflows.
-- REST: HTTP endpoints for direct API integration.
+- REST: HTTPS endpoints for direct API integration.
 
 Use either interface based on your deployment and integration architecture.
 

@@ -102,7 +102,7 @@ paths:
                         description: >-
                           Hexadecimal tagID (EPC) of the target tag.
                           Only present when action is enableTagProtection or disableTagProtection.
-                        pattern: '^[0-9A-Fa-f]+$'
+                        pattern: '^([0-9A-Fa-f]{24})+$'
                         example: 'e2801191a5030069073b426d'
                       enableShortRange:
                         type: boolean
@@ -141,7 +141,7 @@ paths:
                             description: List of tag IDs (EPC strings) that are to be quieted or unquieted.
                             items:
                               type: string
-                              pattern: '^[0-9A-Fa-f]+$'
+                              pattern: '^([0-9A-Fa-f]{24})+$'
                               example: 'e2801191a5030069073b426d'
                         required:
                           - action
@@ -261,7 +261,7 @@ paths:
                         tagID:
                           type: string
                           description: Hexadecimal tagID (EPC) of the target tag.
-                          pattern: '^[0-9A-Fa-f]+$'
+                          pattern: '^([0-9A-Fa-f]{24})+$'
                           example: 'e2801191a5030069073b426d'
                         enableShortRange:
                           type: boolean
@@ -342,7 +342,7 @@ paths:
                           items:
                             type: string
                             description: Hexadecimal EPC string of a tag.
-                            pattern: '^[0-9A-Fa-f]+$'
+                            pattern: '^([0-9A-Fa-f]{24})+$'
                             example: 'e2801191a5030069073b426d'
                       required:
                         - action
@@ -457,13 +457,7 @@ paths:
                   example: true
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: integer
-                description: Returns 1 when stop request is accepted/successful.
-                example: 1
+          description: OK (no response body)
         '500':
           description: Internal Server Error
           content:
@@ -490,12 +484,7 @@ paths:
       operationId: stopIotCloudService
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: string
-                example: ""
+          description: OK (no response body)
         '500':
           description: Internal Server Error
           content:

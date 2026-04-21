@@ -17,6 +17,7 @@
         "action": {
           "type": "string",
           "const": "enableTagVisibility",
+          "enum": ["enableTagVisibility"],
           "description": "Enables the reader to read protected tags."
         },
         "password": {

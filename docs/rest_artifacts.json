@@ -32,7 +32,7 @@
       "additionalProperties": false
     },
     "response_example": {
-      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
     },
     "response_schema": {
       "title": "Disable FastID Success Response",
@@ -48,7 +48,7 @@
       ],
       "examples": [
         {
-          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
         }
       ]
     }
@@ -81,6 +81,9 @@
             "action": {
               "type": "string",
               "const": "disableTagProtection",
+              "enum": [
+                "disableTagProtection"
+              ],
               "description": "Disables Protected Mode on the specified tag."
             },
             "password": {
@@ -93,7 +96,7 @@
             "tagID": {
               "type": "string",
               "description": "Hexadecimal tagID (EPC) of the target tag.",
-              "pattern": "^[0-9A-Fa-f]+$"
+              "pattern": "^([0-9A-Fa-f]{24})+$"
             }
           },
           "additionalProperties": false
@@ -102,7 +105,7 @@
       "additionalProperties": false
     },
     "response_example": {
-      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
     },
     "response_schema": {
       "title": "Disable Impinj Protected Mode Success Response",
@@ -117,7 +120,7 @@
       ],
       "examples": [
         {
-          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
         }
       ]
     }
@@ -148,6 +151,9 @@
             "action": {
               "type": "string",
               "const": "disableTagVisibility",
+              "enum": [
+                "disableTagVisibility"
+              ],
               "description": "Disables the reader from reading protected tags."
             },
             "password": {
@@ -168,7 +174,7 @@
       "additionalProperties": false
     },
     "response_example": {
-      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
     },
     "response_schema": {
       "title": "Clear Protected Mode Configuration Success Response",
@@ -184,7 +190,7 @@
       ],
       "examples": [
         {
-          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
         }
       ]
     }
@@ -222,7 +228,7 @@
       "additionalProperties": false
     },
     "response_example": {
-      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
     },
     "response_schema": {
       "title": "Disable TagFocus Success Response",
@@ -237,7 +243,7 @@
       ],
       "examples": [
         {
-          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
         }
       ]
     }
@@ -275,7 +281,7 @@
       "additionalProperties": false
     },
     "response_example": {
-      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
     },
     "response_schema": {
       "title": "Enable FastID Success Response",
@@ -290,7 +296,7 @@
       ],
       "examples": [
         {
-          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
         }
       ]
     }
@@ -325,6 +331,9 @@
             "action": {
               "type": "string",
               "const": "enableTagProtection",
+              "enum": [
+                "enableTagProtection"
+              ],
               "description": "Enables Protected Mode on the specified tag."
             },
             "password": {
@@ -337,7 +346,7 @@
             "tagID": {
               "type": "string",
               "description": "Hexadecimal tagID (EPC) of the target tag.",
-              "pattern": "^[0-9A-Fa-f]+$"
+              "pattern": "^([0-9A-Fa-f]{24})+$"
             },
             "enableShortRange": {
               "type": "boolean",
@@ -350,7 +359,7 @@
       "additionalProperties": false
     },
     "response_example": {
-      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
     },
     "response_schema": {
       "title": "Enable Protected Mode with Short Range Success Response",
@@ -366,7 +375,7 @@
       ],
       "examples": [
         {
-          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
         }
       ]
     }
@@ -400,6 +409,9 @@
             "action": {
               "type": "string",
               "const": "enableTagProtection",
+              "enum": [
+                "enableTagProtection"
+              ],
               "description": "Sets a tag to protected mode."
             },
             "password": {
@@ -412,7 +424,7 @@
             "tagID": {
               "type": "string",
               "description": "Hexadecimal tagID (EPC) of the target tag.",
-              "pattern": "^[0-9A-Fa-f]+$"
+              "pattern": "^([0-9A-Fa-f]{24})+$"
             },
             "enableShortRange": {
               "type": "boolean",
@@ -435,7 +447,7 @@
       "additionalProperties": false
     },
     "response_example": {
-      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
     },
     "response_schema": {
       "title": "Enable Impinj Protected Mode Success Response",
@@ -451,7 +463,7 @@
       ],
       "examples": [
         {
-          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
         }
       ]
     }
@@ -482,6 +494,9 @@
             "action": {
               "type": "string",
               "const": "enableTagVisibility",
+              "enum": [
+                "enableTagVisibility"
+              ],
               "description": "Enables the reader to read protected tags."
             },
             "password": {
@@ -502,7 +517,7 @@
       "additionalProperties": false
     },
     "response_example": {
-      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
     },
     "response_schema": {
       "title": "Enable Inventory of Protected Tags Success Response",
@@ -517,7 +532,7 @@
       ],
       "examples": [
         {
-          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
         }
       ]
     }
@@ -649,6 +664,9 @@
                 "action": {
                   "type": "string",
                   "const": "quiet",
+                  "enum": [
+                    "quiet"
+                  ],
                   "description": "Silence the specified tags."
                 },
                 "tagIDs": {
@@ -657,7 +675,7 @@
                   "minItems": 1,
                   "items": {
                     "type": "string",
-                    "pattern": "^[0-9A-Fa-f]+$"
+                    "pattern": "^([0-9A-Fa-f]{24})+$"
                   }
                 }
               },
@@ -670,7 +688,7 @@
       "additionalProperties": false
     },
     "response_example": {
-      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
     },
     "response_schema": {
       "title": "Quiet Tags Success Response",
@@ -685,7 +703,7 @@
       ],
       "examples": [
         {
-          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
         }
       ]
     }
@@ -706,13 +724,13 @@
       },
       "additionalProperties": false
     },
-    "response_example": "",
+    "response_example": null,
     "response_schema": {
       "title": "Start IOT Cloud Service Success Response",
-      "description": "Returns 1 when start request is accepted/successful.",
-      "type": "integer",
+      "description": "No response body on success.",
+      "type": "null",
       "examples": [
-        1
+        null
       ]
     }
   },
@@ -725,13 +743,13 @@
       "properties": {},
       "additionalProperties": false
     },
-    "response_example": 1,
+    "response_example": null,
     "response_schema": {
       "title": "Stop IOT Cloud Service Success Response",
-      "description": "Returns 1 when stop request is accepted/successful.",
-      "type": "integer",
+      "description": "No response body on success.",
+      "type": "null",
       "examples": [
-        1
+        null
       ]
     }
   },
@@ -773,6 +791,9 @@
                 "action": {
                   "type": "string",
                   "const": "unquiet",
+                  "enum": [
+                    "unquiet"
+                  ],
                   "description": "Restore the specified tags."
                 },
                 "tagIDs": {
@@ -781,7 +802,7 @@
                   "minItems": 1,
                   "items": {
                     "type": "string",
-                    "pattern": "^[0-9A-Fa-f]+$"
+                    "pattern": "^([0-9A-Fa-f]{24})+$"
                   }
                 }
               },
@@ -794,7 +815,7 @@
       "additionalProperties": false
     },
     "response_example": {
-      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+      "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
     },
     "response_schema": {
       "title": "Unquiet Tags Success Response",
@@ -810,7 +831,7 @@
       ],
       "examples": [
         {
-          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features. (Stop radio first before starting with Gen2X)"
+          "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
         }
       ]
     }
