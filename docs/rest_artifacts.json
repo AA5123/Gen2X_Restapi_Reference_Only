@@ -724,13 +724,13 @@
       },
       "additionalProperties": false
     },
-    "response_example": "",
+    "response_example": null,
     "response_schema": {
       "title": "Start IOT Cloud Service Success Response",
       "description": "No response body on success.",
-      "type": "string",
+      "type": "null",
       "examples": [
-        ""
+        null
       ]
     }
   },
@@ -743,13 +743,13 @@
       "properties": {},
       "additionalProperties": false
     },
-    "response_example": "",
+    "response_example": null,
     "response_schema": {
       "title": "Stop IOT Cloud Service Success Response",
       "description": "No response body on success.",
-      "type": "string",
+      "type": "null",
       "examples": [
-        ""
+        null
       ]
     }
   },
