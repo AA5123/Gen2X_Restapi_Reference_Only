@@ -38,6 +38,7 @@
             },
             "tagID": {
               "type": "string",
+              "pattern": "^[0-9A-Fa-f]+$",
               "description": "Tag EPC ID"
             }
           },
