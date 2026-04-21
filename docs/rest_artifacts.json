@@ -93,7 +93,7 @@
             "tagID": {
               "type": "string",
               "description": "Hexadecimal tagID (EPC) of the target tag.",
-              "pattern": "^(?:[0-9A-Fa-f]{2})+$"
+              "pattern": "^[0-9A-Fa-f]+$"
             }
           },
           "additionalProperties": false
@@ -337,7 +337,7 @@
             "tagID": {
               "type": "string",
               "description": "Hexadecimal tagID (EPC) of the target tag.",
-              "pattern": "^(?:[0-9A-Fa-f]{2})+$"
+              "pattern": "^[0-9A-Fa-f]+$"
             },
             "enableShortRange": {
               "type": "boolean",
@@ -412,7 +412,7 @@
             "tagID": {
               "type": "string",
               "description": "Hexadecimal tagID (EPC) of the target tag.",
-              "pattern": "^(?:[0-9A-Fa-f]{2})+$"
+              "pattern": "^[0-9A-Fa-f]+$"
             },
             "enableShortRange": {
               "type": "boolean",
@@ -657,7 +657,7 @@
                   "minItems": 1,
                   "items": {
                     "type": "string",
-                    "pattern": "^(?:[0-9A-Fa-f]{2})+$"
+                    "pattern": "^[0-9A-Fa-f]+$"
                   }
                 }
               },
@@ -781,7 +781,7 @@
                   "minItems": 1,
                   "items": {
                     "type": "string",
-                    "pattern": "^(?:[0-9A-Fa-f]{2})+$"
+                    "pattern": "^[0-9A-Fa-f]+$"
                   }
                 }
               },

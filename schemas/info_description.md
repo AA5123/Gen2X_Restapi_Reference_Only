@@ -54,8 +54,6 @@ Use this sequence for the same workflow through MQTT commands:
 
 ## Feature Scope and Behavior
 
-### Gen2X Features
-
 Gen2X supports four features:
 - **Protected Mode** (tag-scoped)
 - **TagFocus** (reader-scoped)
