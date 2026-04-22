@@ -611,7 +611,7 @@
     }
   },
   "getGen2xConfig": {
-    "request_example": {},
+    "request_example": null,
     "request_schema": {
       "title": "Get Gen2X Configuration Request",
       "description": "No request body required. Use GET /cloud/impinjGen2X.",
@@ -820,14 +820,13 @@
     "response_schema": {
       "title": "Start IOT Cloud Service Success Response",
       "description": "No response body on success.",
-      "type": "null",
-      "examples": [
-        null
-      ]
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
     }
   },
   "stop": {
-    "request_example": {},
+    "request_example": null,
     "request_schema": {
       "title": "Stop IOT Cloud Service Request",
       "description": "No request body required. Use PUT /cloud/stop.",
@@ -839,10 +838,9 @@
     "response_schema": {
       "title": "Stop IOT Cloud Service Success Response",
       "description": "No response body on success.",
-      "type": "null",
-      "examples": [
-        null
-      ]
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
     }
   },
   "unquietTags": {

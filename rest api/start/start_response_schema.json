@@ -1,8 +1,7 @@
 {
     "title":  "Start IOT Cloud Service Success Response",
     "description":  "No response body on success.",
-    "type":  "null",
-    "examples":  [
-                     null
-                 ]
+    "type":  "object",
+    "properties": {},
+    "additionalProperties": false
 }

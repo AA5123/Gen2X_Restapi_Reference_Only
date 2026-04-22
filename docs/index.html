@@ -404,6 +404,7 @@
       var restResExampleJson = toPrettyJson(restResExampleData);
       /* true when the bundle explicitly has null (empty body), not just absent */
       var restResExampleEmpty = (restResExampleData === null);
+      var restReqExampleEmpty = (restReqExampleData === null);
       var restReqSchemaHtml = restReqSchemaData ? schemaTable(restReqSchemaData) : '';
       var restResSchemaHtml = (restResSchemaData !== undefined && restResSchemaData !== null) ? schemaTable(restResSchemaData) : '';
 
@@ -429,12 +430,16 @@
           reqHtml += '<div class="tab-bar">';
           if (reqExampleJson) reqHtml += '<button class="tab-btn active" data-tab="req-ex-' + id + '">MQTT Example</button>';
           if (schemaHtml) reqHtml += '<button class="tab-btn" data-tab="req-sc-' + id + '">MQTT Schema</button>';
-          if (restReqExampleJson) reqHtml += '<button class="tab-btn" data-tab="req-rest-ex-' + id + '">REST Example</button>';
+          if (restReqExampleJson || restReqExampleEmpty) reqHtml += '<button class="tab-btn" data-tab="req-rest-ex-' + id + '">REST Example</button>';
           if (restReqSchemaHtml) reqHtml += '<button class="tab-btn" data-tab="req-rest-sc-' + id + '">REST Schema</button>';
           reqHtml += '</div>';
           if (reqExampleJson) reqHtml += '<div class="tab-panel active" id="req-ex-' + id + '"><pre class="language-json"><code class="language-json">' + escHtml(reqExampleJson) + '</code></pre></div>';
           if (schemaHtml) reqHtml += '<div class="tab-panel" id="req-sc-' + id + '">' + schemaHtml + '</div>';
-          if (restReqExampleJson) reqHtml += '<div class="tab-panel" id="req-rest-ex-' + id + '"><pre class="language-json"><code class="language-json">' + escHtml(restReqExampleJson) + '</code></pre></div>';
+          if (restReqExampleJson) {
+            reqHtml += '<div class="tab-panel" id="req-rest-ex-' + id + '"><pre class="language-json"><code class="language-json">' + escHtml(restReqExampleJson) + '</code></pre></div>';
+          } else if (restReqExampleEmpty) {
+            reqHtml += '<div class="tab-panel" id="req-rest-ex-' + id + '"><p class="no-response-body">(no request body needed)</p></div>';
+          }
           if (restReqSchemaHtml) reqHtml += '<div class="tab-panel" id="req-rest-sc-' + id + '">' + restReqSchemaHtml + '</div>';
           reqHtml += '</div>';
         }
