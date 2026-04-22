@@ -16,6 +16,7 @@
         "enabled": {
           "type": "boolean",
           "const": false,
+          "enum": [false],
           "description": "Disable the FastID feature."
         }
       },

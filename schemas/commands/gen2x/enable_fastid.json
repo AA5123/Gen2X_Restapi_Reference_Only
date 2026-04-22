@@ -35,6 +35,7 @@
                         "enabled": {
                             "type": "boolean",
                             "const": true,
+                            "enum": [true],
                             "description": "Enable FastID feature"
                         }
                     },
