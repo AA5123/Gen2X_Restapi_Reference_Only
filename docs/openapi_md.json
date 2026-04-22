@@ -1973,7 +1973,8 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "enabled": {
-                                                            "type": "boolean"
+                                                            "type": "boolean",
+                                                            "description": "Whether FastID is enabled"
                                                         }
                                                     },
                                                     "description": "FastID configuration (present only if previously configured)"
@@ -1988,16 +1989,20 @@
                                                                 "disableTagProtection",
                                                                 "enableTagVisibility",
                                                                 "disableTagVisibility"
-                                                            ]
+                                                            ],
+                                                            "description": "Current protection action applied to the tag"
                                                         },
                                                         "password": {
-                                                            "type": "string"
+                                                            "type": "string",
+                                                            "description": "8-character hexadecimal 32-bit password used for tag protection"
                                                         },
                                                         "tagID": {
-                                                            "type": "string"
+                                                            "type": "string",
+                                                            "description": "Hexadecimal EPC of the protected tag"
                                                         },
                                                         "enableShortRange": {
-                                                            "type": "boolean"
+                                                            "type": "boolean",
+                                                            "description": "Whether short-range protection mode is enabled"
                                                         }
                                                     },
                                                     "description": "Protected Mode configuration (present only if previously configured)"
@@ -2006,7 +2011,8 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "enabled": {
-                                                            "type": "boolean"
+                                                            "type": "boolean",
+                                                            "description": "Whether TagFocus is enabled"
                                                         }
                                                     },
                                                     "description": "TagFocus configuration (present only if previously configured)"
@@ -2016,16 +2022,19 @@
                                                     "properties": {
                                                         "basic": {
                                                             "type": "object",
+                                                            "description": "Basic tag quieting settings",
                                                             "properties": {
                                                                 "action": {
                                                                     "type": "string",
                                                                     "enum": [
                                                                         "quiet",
                                                                         "unquiet"
-                                                                    ]
+                                                                    ],
+                                                                    "description": "Action applied to the specified tags"
                                                                 },
                                                                 "tagIDs": {
                                                                     "type": "array",
+                                                                    "description": "List of hexadecimal EPC strings of affected tags",
                                                                     "items": {
                                                                         "type": "string"
                                                                     }
