@@ -88,7 +88,7 @@ This request stages TagProtect settings to remove protection from a tag. Use `PU
 	"properties": {
 		"message": {
 			"type": "string",
-			"description": "Success message confirming the Gen2X configuration was staged"
+			"description": "Response status indicating success or failure"
 		}
 	},
 	"required": [

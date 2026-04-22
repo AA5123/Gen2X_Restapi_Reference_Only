@@ -93,7 +93,7 @@ This request stages TagProtect settings. Use `PUT /cloud/start` with `applyImpin
 	"properties": {
 		"message": {
 			"type": "string",
-			"description": "Success message confirming the Gen2X configuration was staged"
+			"description": "Response status indicating success or failure"
 		}
 	},
 	"required": [
