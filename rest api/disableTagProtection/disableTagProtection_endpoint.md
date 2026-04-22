@@ -1,4 +1,4 @@
-# Enable Protected Mode (REST)
+# Disable Protected Mode (REST)
 
 Source: docs/rest_openapi.yaml
 
@@ -7,7 +7,7 @@ Source: docs/rest_openapi.yaml
 - OperationId: `setImpinjGen2X`
 - Content-Type: `application/json`
 
-This request stages TagProtect settings. Use `PUT /cloud/start` with `applyImpinjGen2X: true` to apply staged settings.
+This request stages TagProtect settings to remove protection from a tag. Use `PUT /cloud/start` with `applyImpinjGen2X: true` to apply staged settings.
 
 ## REST Example
 
@@ -16,10 +16,9 @@ This request stages TagProtect settings. Use `PUT /cloud/start` with `applyImpin
 ```json
 {
 	"tagProtect": {
-		"action": "enableTagProtection",
+		"action": "disableTagProtection",
 		"password": "77777777",
-		"tagID": "e2801191a5030069073b426d",
-		"enableShortRange": true
+		"tagID": "e2801191a5030069073b426d"
 	}
 }
 ```
@@ -39,7 +38,7 @@ This request stages TagProtect settings. Use `PUT /cloud/start` with `applyImpin
 ```json
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "Enable Protected Mode Request",
+	"title": "Disable Protected Mode Request",
 	"type": "object",
 	"required": [
 		"tagProtect"
@@ -55,12 +54,12 @@ This request stages TagProtect settings. Use `PUT /cloud/start` with `applyImpin
 			"properties": {
 				"action": {
 					"type": "string",
-					"const": "enableTagProtection",
-					"description": "Sets a tag to protected mode."
+					"const": "disableTagProtection",
+					"description": "Disables Protected Mode on the specified tag."
 				},
 				"password": {
 					"type": "string",
-					"description": "8-character hexadecimal 32-bit password used for tag protection.",
+					"description": "8-character hexadecimal 32-bit password.",
 					"minLength": 8,
 					"maxLength": 8,
 					"pattern": "^[0-9A-Fa-f]{8}$"
@@ -69,10 +68,6 @@ This request stages TagProtect settings. Use `PUT /cloud/start` with `applyImpin
 					"type": "string",
 					"description": "Hexadecimal tagID (EPC) of the target tag.",
 					"pattern": "^[0-9A-Fa-f]+$"
-				},
-				"enableShortRange": {
-					"type": "boolean",
-					"description": "Enables short-range protection mode for higher security."
 				}
 			},
 			"additionalProperties": false
@@ -87,8 +82,8 @@ This request stages TagProtect settings. Use `PUT /cloud/start` with `applyImpin
 ```json
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "Enable Protected Mode Success Response",
-	"description": "Confirms tag protection was enabled and staged for application.",
+	"title": "Disable Protected Mode Success Response",
+	"description": "Confirms tag protection was disabled and staged for application.",
 	"type": "object",
 	"properties": {
 		"message": {
