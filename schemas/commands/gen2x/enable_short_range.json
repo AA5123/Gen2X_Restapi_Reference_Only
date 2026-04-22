@@ -49,7 +49,7 @@
                         },
                         "tagID": {
                             "type": "string",
-                            "pattern": "^([0-9A-Fa-f]{24})+$",
+                            "pattern": "^[0-9A-Fa-f]+$",
                             "description": "Hexadecimal tagID (EPC) of the target tag"
                         },
                         "enableShortRange": {

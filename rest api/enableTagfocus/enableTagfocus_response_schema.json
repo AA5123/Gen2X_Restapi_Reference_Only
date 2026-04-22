@@ -1,9 +1,11 @@
 {
     "title":  "Enable TagFocus Success Response",
+    "description": "Confirms TagFocus feature was enabled and staged for application.",
     "type":  "object",
     "properties":  {
                        "message":  {
-                                       "type":  "string"
+                                       "type":  "string",
+                                       "description": "Success message confirming the Gen2X configuration was staged"
                                    }
                    },
     "required":  [

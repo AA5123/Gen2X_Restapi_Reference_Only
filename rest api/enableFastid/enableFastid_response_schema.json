@@ -1,9 +1,11 @@
 {
     "title":  "Enable FastID Success Response",
+    "description": "Confirms FastID feature was staged for application.",
     "type":  "object",
     "properties":  {
                        "message":  {
-                                       "type":  "string"
+                                       "type":  "string",
+                                       "description": "Success message confirming the Gen2X configuration was staged"
                                    }
                    },
     "required":  [

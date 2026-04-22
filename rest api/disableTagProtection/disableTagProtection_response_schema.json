@@ -1,9 +1,11 @@
 {
-    "title":  "Disable Impinj Protected Mode Success Response",
+    "title":  "Disable Protected Mode Success Response",
+    "description": "Confirms tag protection was disabled and staged for application.",
     "type":  "object",
     "properties":  {
                        "message":  {
-                                       "type":  "string"
+                                       "type":  "string",
+                                       "description": "Success message confirming the Gen2X configuration was staged"
                                    }
                    },
     "required":  [

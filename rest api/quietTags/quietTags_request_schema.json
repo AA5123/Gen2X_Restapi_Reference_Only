@@ -33,7 +33,7 @@
               "minItems": 1,
               "items": {
                 "type": "string",
-                "pattern": "^([0-9A-Fa-f]{24})+$"
+                "pattern": "^[0-9A-Fa-f]+$"
               }
             }
           },

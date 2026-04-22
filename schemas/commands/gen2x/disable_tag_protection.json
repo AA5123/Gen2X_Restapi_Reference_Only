@@ -1,6 +1,6 @@
 {
   "title": "disable_tag_protection",
-  "x-summary": "Disable Impinj Protected Mode",
+  "x-summary": "Disable Protected Mode",
   "description": "Removes the TagProtect lock from a specific tag. Once disabled, the tag becomes visible to all readers again without needing any password.",
   "x-tag": "Protected Mode",
   "type": "object",
@@ -38,7 +38,7 @@
             },
             "tagID": {
               "type": "string",
-              "pattern": "^([0-9A-Fa-f]{24})+$",
+              "pattern": "^[0-9A-Fa-f]+$",
               "description": "Tag EPC ID"
             }
           },

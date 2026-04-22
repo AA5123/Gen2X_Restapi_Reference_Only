@@ -36,11 +36,12 @@
     },
     "response_schema": {
       "title": "Disable FastID Success Response",
-      "description": "From PUT /cloud/impinjGen2X 200 response",
+      "description": "Confirms FastID feature was disabled and staged for application.",
       "type": "object",
       "properties": {
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Success message confirming the Gen2X configuration was staged"
         }
       },
       "required": [
@@ -62,7 +63,7 @@
       }
     },
     "request_schema": {
-      "title": "Disable Impinj Protected Mode Request",
+      "title": "Disable Protected Mode Request",
       "description": "Request payload for disabling TagProtect on a specific tag.",
       "type": "object",
       "required": [
@@ -96,7 +97,7 @@
             "tagID": {
               "type": "string",
               "description": "Hexadecimal tagID (EPC) of the target tag.",
-              "pattern": "^([0-9A-Fa-f]{24})+$"
+              "pattern": "^[0-9A-Fa-f]+$"
             }
           },
           "additionalProperties": false
@@ -108,11 +109,13 @@
       "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
     },
     "response_schema": {
-      "title": "Disable Impinj Protected Mode Success Response",
+      "title": "Disable Protected Mode Success Response",
+      "description": "Confirms tag protection was disabled and staged for application.",
       "type": "object",
       "properties": {
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Success message confirming the Gen2X configuration was staged"
         }
       },
       "required": [
@@ -177,12 +180,13 @@
       "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
     },
     "response_schema": {
-      "title": "Clear Protected Mode Configuration Success Response",
-      "description": "From PUT /cloud/impinjGen2X 200 response",
+      "title": "Disable Tag Visibility Success Response",
+      "description": "Confirms tag visibility was disabled and staged for application.",
       "type": "object",
       "properties": {
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Success message confirming the Gen2X configuration was staged"
         }
       },
       "required": [
@@ -232,10 +236,12 @@
     },
     "response_schema": {
       "title": "Disable TagFocus Success Response",
+      "description": "Confirms TagFocus feature was disabled and staged for application.",
       "type": "object",
       "properties": {
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Success message confirming the Gen2X configuration was staged"
         }
       },
       "required": [
@@ -285,10 +291,12 @@
     },
     "response_schema": {
       "title": "Enable FastID Success Response",
+      "description": "Confirms FastID feature was staged for application.",
       "type": "object",
       "properties": {
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Success message confirming the Gen2X configuration was staged"
         }
       },
       "required": [
@@ -346,7 +354,7 @@
             "tagID": {
               "type": "string",
               "description": "Hexadecimal tagID (EPC) of the target tag.",
-              "pattern": "^([0-9A-Fa-f]{24})+$"
+              "pattern": "^[0-9A-Fa-f]+$"
             },
             "enableShortRange": {
               "type": "boolean",
@@ -362,12 +370,13 @@
       "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
     },
     "response_schema": {
-      "title": "Enable Protected Mode with Short Range Success Response",
-      "description": "From PUT /cloud/impinjGen2X 200 response",
+      "title": "Enable Short Range Protection Success Response",
+      "description": "Confirms short-range protection was enabled and staged for application.",
       "type": "object",
       "properties": {
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Success message confirming the Gen2X configuration was staged"
         }
       },
       "required": [
@@ -390,7 +399,7 @@
       }
     },
     "request_schema": {
-      "title": "Enable Impinj Protected Mode Request",
+      "title": "Enable Protected Mode Request",
       "description": "Request payload for enabling TagProtect on a specific tag.",
       "type": "object",
       "required": [
@@ -424,7 +433,7 @@
             "tagID": {
               "type": "string",
               "description": "Hexadecimal tagID (EPC) of the target tag.",
-              "pattern": "^([0-9A-Fa-f]{24})+$"
+              "pattern": "^[0-9A-Fa-f]+$"
             },
             "enableShortRange": {
               "type": "boolean",
@@ -450,12 +459,13 @@
       "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
     },
     "response_schema": {
-      "title": "Enable Impinj Protected Mode Success Response",
-      "description": "From PUT /cloud/impinjGen2X 200 response in docs/rest_openapi.yaml",
+      "title": "Enable Protected Mode Success Response",
+      "description": "Confirms tag protection was enabled and staged for application.",
       "type": "object",
       "properties": {
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Success message confirming the Gen2X configuration was staged"
         }
       },
       "required": [
@@ -520,11 +530,13 @@
       "message": "Success: Gen2X configured. Use applyImpinjGen2X flag in start command to apply features."
     },
     "response_schema": {
-      "title": "Enable Inventory of Protected Tags Success Response",
+      "title": "Enable Tag Visibility Success Response",
+      "description": "Confirms tag visibility was enabled and staged for application.",
       "type": "object",
       "properties": {
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Success message confirming the Gen2X configuration was staged"
         }
       },
       "required": [
@@ -574,10 +586,12 @@
     },
     "response_schema": {
       "title": "Enable TagFocus Success Response",
+      "description": "Confirms TagFocus feature was enabled and staged for application.",
       "type": "object",
       "properties": {
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Success message confirming the Gen2X configuration was staged"
         }
       },
       "required": [
@@ -606,24 +620,94 @@
     },
     "response_schema": {
       "title": "Get Gen2X Configuration Success Response",
-      "description": "Returns the current Gen2X configuration. Only the latest configured feature is included.",
+      "description": "Returns the current Gen2X configuration. Only previously configured feature objects are included.",
       "type": "object",
       "properties": {
-        "tagFocus": {
+        "fastID": {
           "type": "object",
+          "description": "FastID configuration (present only if previously configured)",
           "properties": {
             "enabled": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Whether FastID is enabled"
             }
           },
           "required": [
             "enabled"
           ]
+        },
+        "tagProtect": {
+          "type": "object",
+          "description": "Protected Mode configuration (present only if previously configured)",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "enableTagProtection",
+                "disableTagProtection",
+                "enableTagVisibility",
+                "disableTagVisibility"
+              ],
+              "description": "Current protection action applied to the tag"
+            },
+            "password": {
+              "type": "string",
+              "description": "8-character hexadecimal 32-bit password used for tag protection"
+            },
+            "tagID": {
+              "type": "string",
+              "description": "Hexadecimal EPC of the protected tag",
+              "pattern": "^[0-9A-Fa-f]+$"
+            },
+            "enableShortRange": {
+              "type": "boolean",
+              "description": "Whether short-range protection mode is enabled"
+            }
+          }
+        },
+        "tagFocus": {
+          "type": "object",
+          "description": "TagFocus configuration (present only if previously configured)",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether TagFocus is enabled"
+            }
+          },
+          "required": [
+            "enabled"
+          ]
+        },
+        "tagQuieting": {
+          "type": "object",
+          "description": "Tag quieting configuration (present only if previously configured)",
+          "properties": {
+            "basic": {
+              "type": "object",
+              "description": "Basic tag quieting settings",
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "enum": [
+                    "quiet",
+                    "unquiet"
+                  ],
+                  "description": "Action applied to the specified tags"
+                },
+                "tagIDs": {
+                  "type": "array",
+                  "description": "List of hexadecimal EPC strings of affected tags",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[0-9A-Fa-f]+$"
+                  }
+                }
+              }
+            }
+          }
         }
       },
-      "required": [
-        "tagFocus"
-      ]
+      "required": []
     }
   },
   "quietTags": {
@@ -675,7 +759,7 @@
                   "minItems": 1,
                   "items": {
                     "type": "string",
-                    "pattern": "^([0-9A-Fa-f]{24})+$"
+                    "pattern": "^[0-9A-Fa-f]+$"
                   }
                 }
               },
@@ -692,10 +776,12 @@
     },
     "response_schema": {
       "title": "Quiet Tags Success Response",
+      "description": "Confirms specified tags were quieted and configuration was staged for application.",
       "type": "object",
       "properties": {
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Success message confirming the Gen2X configuration was staged"
         }
       },
       "required": [
@@ -802,7 +888,7 @@
                   "minItems": 1,
                   "items": {
                     "type": "string",
-                    "pattern": "^([0-9A-Fa-f]{24})+$"
+                    "pattern": "^[0-9A-Fa-f]+$"
                   }
                 }
               },
@@ -819,11 +905,12 @@
     },
     "response_schema": {
       "title": "Unquiet Tags Success Response",
-      "description": "From PUT /cloud/impinjGen2X 200 response",
+      "description": "Confirms specified tags were unquieted and configuration was staged for application.",
       "type": "object",
       "properties": {
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Success message confirming the Gen2X configuration was staged"
         }
       },
       "required": [

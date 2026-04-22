@@ -1,5 +1,5 @@
 **Description:**
-Enable Impinj Protected Mode with Short Range — Protects an RFID tag with a 32-bit access password and restricts its response range to short distance only.
+Enable Protected Mode with Short Range — Protects an RFID tag with a 32-bit access password and restricts its response range to short distance only.
 
 **Usage:**
 Send this command with the target tag's EPC ID, a 32-bit access password, and set `enableShortRange` to `true`. The tag enters Protected Mode and only responds to readers in close physical proximity. This is ideal for point-of-sale operations or scenarios requiring location-specific tag reads.

@@ -1,4 +1,4 @@
-# Enable Impinj Protected Mode (REST)
+# Enable Protected Mode (REST)
 
 Source: docs/rest_openapi.yaml
 
@@ -37,7 +37,7 @@ This request stages TagProtect settings. Use `PUT /cloud/start` with `applyImpin
 ```json
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "Enable Impinj Protected Mode Request",
+	"title": "Enable Protected Mode Request",
 	"type": "object",
 	"required": [
 		"tagProtect"
@@ -85,7 +85,7 @@ This request stages TagProtect settings. Use `PUT /cloud/start` with `applyImpin
 ```json
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "Enable Impinj Protected Mode Success Response",
+	"title": "Enable Protected Mode Success Response",
 	"description": "From PUT /cloud/impinjGen2X 200 response in docs/rest_openapi.yaml",
 	"type": "string",
 	"examples": [

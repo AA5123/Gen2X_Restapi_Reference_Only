@@ -1,9 +1,11 @@
 {
-    "title":  "Enable Inventory of Protected Tags Success Response",
+    "title":  "Enable Tag Visibility Success Response",
+    "description": "Confirms tag visibility was enabled and staged for application.",
     "type":  "object",
     "properties":  {
                        "message":  {
-                                       "type":  "string"
+                                       "type":  "string",
+                                       "description": "Success message confirming the Gen2X configuration was staged"
                                    }
                    },
     "required":  [

@@ -1,10 +1,11 @@
 {
-    "title": "Enable Protected Mode with Short Range Success Response",
-    "description": "From PUT /cloud/impinjGen2X 200 response",
+    "title": "Enable Short Range Protection Success Response",
+    "description": "Confirms short-range protection was enabled and staged for application.",
     "type": "object",
     "properties": {
         "message": {
-            "type": "string"
+            "type": "string",
+            "description": "Success message confirming the Gen2X configuration was staged"
         }
     },
     "required": ["message"],

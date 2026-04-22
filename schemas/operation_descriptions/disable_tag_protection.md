@@ -1,5 +1,5 @@
 **Description:**
-Disable Impinj Protected Mode — Removes the 32-bit access password protection from an RFID tag, restoring normal operation.
+Disable Protected Mode — Removes the 32-bit access password protection from an RFID tag, restoring normal operation.
 
 **Usage:**
 Send this command with the target tag's EPC ID and the 32-bit access password that was used to enable Protected Mode. Once disabled, the tag returns to normal operation and responds to all standard inventory commands without authentication.
