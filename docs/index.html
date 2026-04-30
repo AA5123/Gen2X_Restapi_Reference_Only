@@ -113,8 +113,8 @@
           type = 'enum';
           enumLine = '<br><span class="schema-allowed">Allowed: ' + p.enum.map(function (v) { return escHtml(String(v)); }).join(' | ') + '</span>';
         }
-        var pad = depth * 20;
-        var reqBadge = required.indexOf(key) !== -1 ? '<span class="schema-req">*</span>' : '';
+        var indentClass = depth > 0 ? 'schema-indent-' + depth : '';
+        var reqBadge = required.indexOf(key) !== -1 ? '<span class="schema-required">*</span>' : '';
         var desc = p.description || '';
         if (p.minLength !== undefined) desc += ' (min: ' + p.minLength + ')';
         if (p.maxLength !== undefined) desc += ' (max: ' + p.maxLength + ')';
@@ -130,12 +130,12 @@
         if (hasChildren) {
           toggleHtml = '<span class="schema-toggle-inline" data-target="' + uid + '" title="Expand">−</span> ';
           rows += '<tr class="schema-row"' + childClass + hiddenAttr + '>' +
-            '<td style="padding-left:' + (14 + pad) + 'px;">' + toggleHtml + '<span class="schema-field">' + escHtml(key) + '</span>' + reqBadge + '</td>' +
+            '<td class="' + indentClass + '">' + toggleHtml + '<span class="schema-field">' + escHtml(key) + '</span>' + reqBadge + '</td>' +
             '<td>' + desc + '</td></tr>';
           rows += schemaRows(p, depth + 1, uid);
         } else {
           rows += '<tr class="schema-row"' + childClass + hiddenAttr + '>' +
-            '<td style="padding-left:' + (14 + pad) + 'px;"><span class="schema-field">' + escHtml(key) + '</span>' + reqBadge + '</td>' +
+            '<td class="' + indentClass + '"><span class="schema-field">' + escHtml(key) + '</span>' + reqBadge + '</td>' +
             '<td><span class="schema-type">' + escHtml(type) + '</span>' + enumLine + '</td>' +
             '<td>' + desc + '</td></tr>';
         }
@@ -149,6 +149,9 @@
       var rows = '';
       if (schema.properties) {
         rows = schemaRows(schema, 0, null);
+        if (!rows) {
+          rows = '<tr><td colspan="3" style="text-align:center; color:#888; font-style:italic;">Not required/applicable</td></tr>';
+        }
       } else {
         var rootType = schema.type || 'object';
         var rootEnum = '';
