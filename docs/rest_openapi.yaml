@@ -44,7 +44,10 @@ paths:
       tags:
         - ImpinjGen2X
       summary: Get Impinj Gen2X configuration
-      description: Retrieves the current Impinj Gen2X feature configuration as last saved. Returns an empty object if no Gen2X configuration has been set yet. Only feature objects that were previously configured are included in the response.
+      description: |
+        Retrieves the current Impinj Gen2X feature configuration as last saved. Returns an empty object if no Gen2X configuration has been set yet. Only feature objects that were previously configured are included in the response.
+
+        **No request payload required/applicable.**
       operationId: getImpinjGen2X
       responses:
         '200':
@@ -442,7 +445,10 @@ paths:
       tags:
         - Control
       summary: Start IOT Cloud Service
-      description: Starts IOT cloud service and applies staged Gen2X configuration.
+      description: |
+        Starts IOT cloud service and applies staged Gen2X configuration.
+
+        **No request payload required/applicable unless applying Gen2X configuration.**
       operationId: startIotCloudService
       requestBody:
         required: false
@@ -485,7 +491,10 @@ paths:
       tags:
         - Control
       summary: Stop IOT Cloud Service
-      description: Stops IOT cloud service.
+      description: |
+        Stops IOT cloud service.
+
+        **No request payload required/applicable.**
       operationId: stopIotCloudService
       responses:
         '200':
